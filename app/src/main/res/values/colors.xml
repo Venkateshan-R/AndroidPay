@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#827E7E</color>
-    <color name="bg_card">#DBF1F9</color>
+    <color name="btn_bg">#499CF4</color>
+    <color name="blue">#499CF4</color>
+    <color name="view_bg">#01050C</color>
+    <color name="et_bg">#6D7F9A</color>
+    <color name="hint">#E6E2E2</color>
 </resources>

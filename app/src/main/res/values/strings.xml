@@ -6,4 +6,33 @@
     <string name="settings">Settings\n</string>
     <string name="transactions">Transactions</string>
 
+
+    <string name="enter_your_mobile_address_and_password">Enter Your Mobile Number and Password</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="new_user_create_an_account">New user? Create an Account</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="register">Register</string>
+
+    <string name="enter_password">Enter password</string>
+    <string name="enter_mobile">Enter mobile number</string>
+    <string name="enter_lastname">Enter Lastname</string>
+    <string name="enter_firstname">Enter Firstname</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="user_already_exit">User Already Exit</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+    <string name="user_not_exist">User not found</string>
+    <string name="logout">Logout</string>
+    <string name="add_bank_account">Add Bank Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="enter_fullname">Enter fullname</string>
+    <string name="account_number">Account Number</string>
+    <string name="enter_accountno">Enter AccountNo</string>
+    <string name="ifsc_code">IFSC code</string>
+    <string name="enter_ifsc_code">Enter IFSC code</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="select_bank">select bank</string>
+
 </resources>

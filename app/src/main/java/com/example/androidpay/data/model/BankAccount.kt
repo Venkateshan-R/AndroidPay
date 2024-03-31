@@ -9,7 +9,7 @@ data class BankAccount(
     val userId: Int,    // Foreign key to User
     val accountNumber: String,
     val bankName: String,
-    val balance: Int,
+    val balance: Int ,
     val perDayTransactionLimit: Int,
     val perTransactionLimit: Int
 )

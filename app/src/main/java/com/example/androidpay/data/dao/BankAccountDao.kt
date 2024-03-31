@@ -1,9 +1,10 @@
 
-package com.example.androidpay.data.model
+package com.example.androidpay.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.androidpay.data.model.BankAccount
 
 @Dao
 interface BankAccountDao {

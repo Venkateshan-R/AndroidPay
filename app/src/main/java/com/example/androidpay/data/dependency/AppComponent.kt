@@ -1,6 +1,10 @@
 package com.example.androidpay.data.dependency
 
 import com.example.androidpay.ui.view.MainActivity
+import com.example.androidpay.ui.viewmodel.BankAccRegViewModel
+import com.example.androidpay.ui.viewmodel.CommonViewModel
+import com.example.androidpay.ui.viewmodel.SettingsViewModel
+import com.example.androidpay.ui.viewmodel.UserViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -9,4 +13,8 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
+    fun inject(bankAccRegViewModel: BankAccRegViewModel)
+    fun inject(userViewModel: UserViewModel)
+    fun inject(commonViewModel: CommonViewModel)
+    fun inject(commonViewModel: SettingsViewModel)
 }

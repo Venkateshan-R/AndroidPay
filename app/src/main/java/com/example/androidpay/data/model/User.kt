@@ -5,6 +5,14 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class User(
-    @PrimaryKey val mobileNumber: Long,
-    val passwordHash: String // Hashed password instead of plain text
-)
+    val mobileNumber: String,
+    val password: String,
+    val firstName: String,
+    val lastName: String,
+    @PrimaryKey(autoGenerate = true)
+    private val userId: Long=0
+) {
+    fun getUserId(): Long {
+        return userId
+    }
+}

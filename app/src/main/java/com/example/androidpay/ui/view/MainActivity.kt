@@ -1,6 +1,12 @@
 package com.example.androidpay.ui.view
 
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.androidpay.R
@@ -22,9 +28,43 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
         val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val bottomNavigation = viewBinding.bottomNavigation
         bottomNavigation.setupWithNavController(navHostFragment.navController)
+        navHostFragment.navController.addOnDestinationChangedListener(object : NavController.OnDestinationChangedListener{
+            override fun onDestinationChanged(
+                controller: NavController,
+                destination: NavDestination,
+                arguments: Bundle?
+            ) {
+                when(destination.id){
+                    R.id.loginFragment ,
+                    R.id.registerFragment -> hideBottomNavigationView()
+                    else -> showBottomNavigationView()
+                }
+            }
+
+        })
+
+        initPrint()
+
 
 
     }
 
+    fun initPrint(){
+        viewModel.logLiveData.observe(this, Observer {
+            Log.d("userlists",it.toString())
+        })
+    }
+
+    fun showBottomNavigationView() {
+        viewBinding.bottomNavigation.visibility = View.VISIBLE
+    }
+    fun hideBottomNavigationView() {
+        viewBinding.bottomNavigation.visibility = View.GONE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getallusers()
+    }
 
 }

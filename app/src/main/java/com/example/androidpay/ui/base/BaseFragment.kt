@@ -15,20 +15,30 @@ abstract class BaseFragment<VM : ViewModel, B : ViewBinding> : Fragment() {
     protected lateinit var viewBinding: B
     protected lateinit var viewModel: VM
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(getViewModelClass())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewBinding = getBinding()
+
+        if (!this::viewBinding.isInitialized)
+        {
+            viewBinding = getBinding()
+            initView()
+        }
+
         return viewBinding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Consider using a dependency injection framework for ViewModel
-        viewModel = ViewModelProvider(this).get(getViewModelClass())
-        initView()
     }
 
     private fun getViewModelClass(): Class<VM> {

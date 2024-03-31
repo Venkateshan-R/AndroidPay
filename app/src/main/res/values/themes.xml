@@ -7,10 +7,22 @@
 
     <style name="Theme.AndroidPay" parent="Base.Theme.AndroidPay" />
 
-    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
-        <item name="android:textSize">10sp</item>
+    <style name="text_bold" parent="android:Widget.TextView">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:textSize">12sp</item>
     </style>
-    <style name="BottomNavigationView.Inactive" parent="@style/TextAppearance.AppCompat.Caption">
-        <item name="android:textSize">10sp</item>
+
+    <style name="text_regular" parent="android:Widget.TextView">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/light</item>
+        <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="text_medium" parent="android:Widget.TextView">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
