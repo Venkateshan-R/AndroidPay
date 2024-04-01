@@ -4,5 +4,7 @@ object Constants {
 
     const val PASSWORD_LENGTH = 6
     const val MOBILE_NUMBER_LENGTH = 6
+    const val ACCOUNT_NUMBER_LENGTH = 12
+    const val AUTHENTICATION_PIN = 4
 
 }

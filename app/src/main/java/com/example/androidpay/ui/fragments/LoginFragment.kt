@@ -38,6 +38,7 @@ class LoginFragment : BaseFragment<UserViewModel, FragmentLoginBinding>() {
     }
 
     private fun setclickListeners(){
+        //Need to check
         viewBinding.header.ivBack.setOnClickListener { findNavController().popBackStack() }
         viewBinding.tvNewuser.setOnClickListener { findNavController().navigate(R.id.action_loginFragment_to_registerFragment) }
         viewBinding.btnLogin.setOnSafeClickListener {

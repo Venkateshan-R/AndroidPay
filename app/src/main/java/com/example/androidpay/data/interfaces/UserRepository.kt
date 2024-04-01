@@ -6,5 +6,6 @@ import com.example.androidpay.data.model.User
 interface UserRepository {
     suspend fun insertUser(user: User) : Long
     suspend fun getUserByMobileNumber(mobileNumber: String): User?
+    suspend fun getUserByuserId(userId: Long): User?
     suspend fun getAllUser(): List<User>
 }

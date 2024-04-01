@@ -18,7 +18,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/btn_bg_curved"
-        android:text="@string/login"
+        android:text="@string/add_bank_account"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@id/btn_login"

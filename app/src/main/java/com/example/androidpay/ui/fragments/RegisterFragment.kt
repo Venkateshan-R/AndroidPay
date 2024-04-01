@@ -41,6 +41,7 @@ class RegisterFragment : BaseFragment<UserViewModel, FragmentRegisterBinding>() 
     }
 
     private fun setclickListeners() {
+        //Need to check
         viewBinding.header.ivBack.setOnClickListener { findNavController().popBackStack() }
         viewBinding.btnRegister.setOnSafeClickListener {
             viewModel.registerUser(

@@ -21,7 +21,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         FragmentSettingsBinding.inflate(layoutInflater)
 
     override fun initView() {
-        context?.showToast("called")
         setUpObservers()
         setclickListeners()
     }

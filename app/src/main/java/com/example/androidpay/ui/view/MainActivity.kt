@@ -35,9 +35,10 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
                 arguments: Bundle?
             ) {
                 when(destination.id){
-                    R.id.loginFragment ,
-                    R.id.registerFragment -> hideBottomNavigationView()
-                    else -> showBottomNavigationView()
+                    R.id.homeFragment ,
+                    R.id.settingsFragment ,
+                    R.id.transactionFragment -> showBottomNavigationView()
+                    else -> hideBottomNavigationView()
                 }
             }
 
@@ -45,13 +46,14 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
 
         initPrint()
 
-
-
     }
 
     fun initPrint(){
         viewModel.logLiveData.observe(this, Observer {
-            Log.d("userlists",it.toString())
+            Log.d("RoomDatas",it.toString())
+        })
+        viewModel.logBankLiveData.observe(this, Observer {
+            Log.d("RoomDatas",it.toString())
         })
     }
 
@@ -65,6 +67,7 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
     override fun onResume() {
         super.onResume()
         viewModel.getallusers()
+        viewModel.getAllbankAcc()
     }
 
 }

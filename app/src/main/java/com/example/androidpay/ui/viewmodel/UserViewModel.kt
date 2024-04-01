@@ -102,10 +102,10 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
             }
         }
         if (mobileNumber.length < Constants.MOBILE_NUMBER_LENGTH) {
-            return "Enter Valid 10 Digit Mobile number"
+            return "Enter Valid ${Constants.MOBILE_NUMBER_LENGTH}  Digit Mobile number"
         }
         if (password.length < PASSWORD_LENGTH) {
-            return "Password length must be greater than 6"
+            return "Password length must be greater than ${Constants.PASSWORD_LENGTH} "
         }
         return ""
     }

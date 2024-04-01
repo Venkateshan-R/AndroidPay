@@ -10,6 +10,7 @@ import com.example.androidpay.data.repository.UserRepositoryImpl
 import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.data.database.SessionManager
+import com.example.androidpay.data.model.BankAccount
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class CommonViewModel(mApplication: Application) : AndroidViewModel(mApplication
 
     var resultLiveData: MutableLiveData<ResultData<User>> = MutableLiveData()
     var logLiveData: MutableLiveData<List<User>> = MutableLiveData()
+    var logBankLiveData: MutableLiveData<List<BankAccount>> = MutableLiveData()
 
     @Inject
     lateinit var userRepositoryImpl: UserRepositoryImpl
@@ -32,6 +34,12 @@ class CommonViewModel(mApplication: Application) : AndroidViewModel(mApplication
     fun getallusers(){
         viewModelScope.launch {
             logLiveData.value = userRepositoryImpl.getAllUser()
+        }
+    }
+
+    fun getAllbankAcc(){
+        viewModelScope.launch {
+            logBankLiveData.value = bankAccountRepositoryImpl.getAllBankAccount()
         }
     }
 

@@ -14,6 +14,10 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE mobileNumber = :mobileNumber")
     suspend fun getUserByMobileNumber(mobileNumber: String): User?
 
+
+    @Query("SELECT * FROM User WHERE userId = :userId")
+    suspend fun getUserByUserId(userId: Long): User?
+
     @Query("SELECT * FROM User ")
     suspend fun getAllUsers(): List<User>
 

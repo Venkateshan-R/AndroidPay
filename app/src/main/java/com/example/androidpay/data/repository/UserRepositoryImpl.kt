@@ -10,6 +10,8 @@ class UserRepositoryImpl @Inject constructor( val userDao: UserDao) : UserReposi
     override suspend fun insertUser(user: User): Long = userDao.insertUser(user)
 
     override suspend fun getUserByMobileNumber(mobileNumber: String): User? = userDao.getUserByMobileNumber(mobileNumber)
+    override suspend fun getUserByuserId(userId: Long): User?= userDao.getUserByUserId(userId)
+
     override suspend fun getAllUser(): List<User> =
          userDao.getAllUsers()
 

@@ -34,5 +34,10 @@
     <string name="enter_ifsc_code">Enter IFSC code</string>
     <string name="bank_name">Bank Name</string>
     <string name="select_bank">select bank</string>
+    <string name="pin">PIN</string>
+    <string name="enter_4_digit_pin">Enter 4 Digit PIN</string>
+    <string name="bank_account_alredy_linked_with_another_user">Bank Account Alredy Linked with Another User</string>
+    <string name="balance">"Balance : "</string>
+    <string name="account_already_added">Account Already Added</string>
 
 </resources>

@@ -5,11 +5,19 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class BankAccount(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val userId: Int,    // Foreign key to User
-    val accountNumber: String,
+    private @PrimaryKey(autoGenerate = true) val id: Int=0,
+    val userId: Long,
+    val userFullName: String,
+    val accountNumber: Long,
+    val ifscCode: String,
     val bankName: String,
-    val balance: Int ,
-    val perDayTransactionLimit: Int,
-    val perTransactionLimit: Int
-)
+    val PIN: Int,
+    val upiId: String,
+    val balance: Long = 0,
+    val perDayTransactionLimit: Int = 100000,
+    val perTransactionLimit: Int= 50000,
+){
+    fun getId(): Int {
+        return id
+    }
+}

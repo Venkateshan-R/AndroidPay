@@ -9,7 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.androidpay.ui.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_addMoneyFragment"
+            app:destination="@id/addMoneyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_payFragment"
+            app:destination="@id/payFragment" />
+    </fragment>
     <fragment
         android:id="@+id/transactionFragment"
         android:name="com.example.androidpay.ui.fragments.TransactionFragment"
@@ -26,6 +33,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_bankAccountRegistrationFragment"
+            app:destination="@id/bankAccountRegistrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -52,4 +62,18 @@
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/bankAccountRegistrationFragment"
+        android:name="com.example.androidpay.ui.fragments.BankAccountRegistrationFragment"
+        android:label="BankAccountRegistrationFragment" />
+    <fragment
+        android:id="@+id/addMoneyFragment"
+        android:name="com.example.androidpay.ui.fragments.AddMoneyFragment"
+        android:label="fragment_add_money"
+        tools:layout="@layout/fragment_add_money" />
+    <fragment
+        android:id="@+id/payFragment"
+        android:name="com.example.androidpay.ui.fragments.PayFragment"
+        android:label="fragment_pay"
+        tools:layout="@layout/fragment_pay" />
 </navigation>
