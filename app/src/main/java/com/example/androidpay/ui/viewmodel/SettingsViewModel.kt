@@ -24,7 +24,6 @@ class SettingsViewModel(val mApplication: Application) : AndroidViewModel(mAppli
     }
 
     var resultLiveData: MutableLiveData<ResultData<User>> = MutableLiveData()
-    var logLiveData: MutableLiveData<List<User>> = MutableLiveData()
 
     @Inject
     lateinit var userRepositoryImpl: UserRepositoryImpl

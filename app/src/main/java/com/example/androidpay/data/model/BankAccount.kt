@@ -2,6 +2,7 @@ package com.example.androidpay.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.androidpay.ui.utils.Constants
 
 @Entity
 data class BankAccount(
@@ -13,9 +14,9 @@ data class BankAccount(
     val bankName: String,
     val PIN: Int,
     val upiId: String,
-    val balance: Long = 0,
-    val perDayTransactionLimit: Int = 100000,
-    val perTransactionLimit: Int= 50000,
+    var balance: Double = 0.0,
+    val perDayTransactionLimit: Int = Constants.PER_DAY_TRANSACTION_LIMIT,
+    val perTransactionLimit: Int=  Constants.PER_TRANSACTION_LIMIT,
 ){
     fun getId(): Int {
         return id

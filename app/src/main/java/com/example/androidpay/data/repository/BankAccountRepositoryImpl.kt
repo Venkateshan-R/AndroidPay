@@ -13,11 +13,14 @@ class BankAccountRepositoryImpl @Inject constructor(private val bankAccountDao: 
     BankAccountRepository {
 
     override suspend fun insertBankAccount(bankAccount: BankAccount) = bankAccountDao.insertBankAccount(bankAccount)
+    override suspend fun updateBankAccount(bankAccount: BankAccount) = bankAccountDao.updateBankAccount(bankAccount)
+
     override suspend fun getAllBankAccount(): List<BankAccount> = bankAccountDao.getAllBankAcc()
 
     override fun getBankAccountsForUser(userId: Long): LiveData<BankAccount?> = bankAccountDao.getBankAccountsForUser(userId)
     override suspend fun getBankAccount(userId: Long): BankAccount? =bankAccountDao.getBankAccount(userId)
 
-
     override suspend fun getBankAccountByAccNo(accountNo: Long): BankAccount? = bankAccountDao.getBankAccountByAccNo(accountNo)
+    override suspend fun getBankAccountByUpiId(upiId: String): BankAccount? = bankAccountDao.getBankAccountByUpiId(upiId)
+
 }

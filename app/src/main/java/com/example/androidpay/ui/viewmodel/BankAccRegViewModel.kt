@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApplication) {
-    var resultLiveData: MutableLiveData<ResultData<BankAccount>> = MutableLiveData()
+    var resultLiveData: MutableLiveData<ResultData<String>> = MutableLiveData()
 
     init {
         (mApplication as MyApplication).appComponent.inject(this)
@@ -69,6 +69,10 @@ class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApp
                         )
                     )
                     bankAccountRepositoryImpl.insertBankAccount(bankAccount)
+
+                    resultLiveData.value =
+                        ResultData.Success(mApplication.getString(R.string.bank_account_added_successfully))
+
 
                 } else {
                     resultLiveData.value =

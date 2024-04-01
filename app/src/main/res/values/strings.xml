@@ -33,11 +33,27 @@
     <string name="ifsc_code">IFSC code</string>
     <string name="enter_ifsc_code">Enter IFSC code</string>
     <string name="bank_name">Bank Name</string>
-    <string name="select_bank">select bank</string>
+    <string name="select_bank">Enter Bank</string>
     <string name="pin">PIN</string>
     <string name="enter_4_digit_pin">Enter 4 Digit PIN</string>
     <string name="bank_account_alredy_linked_with_another_user">Bank Account Alredy Linked with Another User</string>
     <string name="balance">"Balance : "</string>
     <string name="account_already_added">Account Already Added</string>
+    <string name="pay">Pay</string>
+    <string name="remarks">Remarks</string>
+    <string name="add_money">Add Money</string>
+    <string name="amount">Amount</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="please_add_bank_account">Please Add Bank Account</string>
+    <string name="amount_added_successfully">Amount Added Successfully</string>
+    <string name="enter_upi">Enter UPI</string>
+    <string name="upi">UPI</string>
+    <string name="enter_remarks">Enter Remarks (Optional)</string>
+    <string name="please_login">Please Login</string>
+    <string name="you_have_entered_invalid_upi">You Have Entered Invalid UPI</string>
+    <string name="insufficient_balance">Insufficient Balance</string>
+    <string name="amount_transfered_successfully">Amount Transfered SuccessFully</string>
+    <string name="bank_account_added_successfully">Bank Account Added SuccessFully</string>
+    <string name="amount_cannot_be_transferred_to_same_account">Amount cannot be transferred to same account</string>
 
 </resources>

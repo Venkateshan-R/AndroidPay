@@ -41,7 +41,7 @@ class BankAccountRegistrationFragment : BaseFragment<BankAccRegViewModel, Fragme
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
                 is ResultData.Success -> {
-                    context?.showToast("Success")
+                    context?.showToast(it.data)
                     findNavController().popBackStack()
                 }
                 is ResultData.Failure -> context?.showToast(it.message)
