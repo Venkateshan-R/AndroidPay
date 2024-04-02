@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.androidpay.ui.fragments.TransactionFragment"
+        android:name="com.example.androidpay.ui.fragments.TransactionHistoryFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" />
     <fragment

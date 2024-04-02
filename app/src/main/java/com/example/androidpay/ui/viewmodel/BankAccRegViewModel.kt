@@ -66,7 +66,7 @@ class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApp
                         upiId = generateUpiId(
                             userMobileNo,
                             bankName
-                        )
+                        ),
                     )
                     bankAccountRepositoryImpl.insertBankAccount(bankAccount)
 

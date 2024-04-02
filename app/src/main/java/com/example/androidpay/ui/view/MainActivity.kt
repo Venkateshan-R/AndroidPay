@@ -55,6 +55,9 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
         viewModel.logBankLiveData.observe(this, Observer {
             Log.d("RoomDatas",it.toString())
         })
+        viewModel.logTransactionLiveData.observe(this, Observer {
+            Log.d("RoomDatas",it.toString())
+        })
     }
 
     fun showBottomNavigationView() {
@@ -68,6 +71,7 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
         super.onResume()
         viewModel.getallusers()
         viewModel.getAllbankAcc()
+        viewModel.getAllTransaction()
     }
 
 }

@@ -55,5 +55,13 @@
     <string name="amount_transfered_successfully">Amount Transfered SuccessFully</string>
     <string name="bank_account_added_successfully">Bank Account Added SuccessFully</string>
     <string name="amount_cannot_be_transferred_to_same_account">Amount cannot be transferred to same account</string>
+    <string name="please_enter_valid_upi">Please Enter Valid UPI</string>
+    <string name="you_are_exceeding_per_transaction_limit">You are exceeding per transaction limit</string>
+    <string name="transfer_failed_amount_exceeds_receiver_s_limit">Transfer failed: Amount exceeds receiver\'s limit</string>
+    <string name="unable_to_transfer_receiver_s_daily_transfer_limit_has_been_reached">Unable to transfer. Receiver\'s daily transfer limit has been reached</string>
+    <string name="unable_to_transfer_your_daily_transfer_limit_has_been_reached">Unable to transfer. your daily transfer limit has been reached</string>
+    <string name="verify">Verify</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="invalid_pin">Invalid Pin</string>
 
 </resources>

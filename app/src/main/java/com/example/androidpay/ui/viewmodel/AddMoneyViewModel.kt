@@ -37,7 +37,7 @@ class AddMoneyViewModel(val mApplication: Application) : AndroidViewModel(mAppli
             viewModelScope.launch {
                 val bankAccount = bankAccountRepositoryImpl.getBankAccount(getUserId())
                     bankAccount?.let {
-                        bankAccount.balance+=amount.toDouble();
+                        bankAccount.addBalance(amount.toDouble());
                         bankAccountRepositoryImpl.updateBankAccount(bankAccount)
 
                         resultLiveData.value = ResultData.Success(mApplication.getString(R.string.amount_added_successfully))

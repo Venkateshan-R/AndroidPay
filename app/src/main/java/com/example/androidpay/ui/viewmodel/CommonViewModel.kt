@@ -11,6 +11,8 @@ import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.data.database.SessionManager
 import com.example.androidpay.data.model.BankAccount
+import com.example.androidpay.data.model.TransactionModel
+import com.example.androidpay.data.repository.TransactionRepositoryImpl
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,11 +25,16 @@ class CommonViewModel(mApplication: Application) : AndroidViewModel(mApplication
     var resultLiveData: MutableLiveData<ResultData<User>> = MutableLiveData()
     var logLiveData: MutableLiveData<List<User>> = MutableLiveData()
     var logBankLiveData: MutableLiveData<List<BankAccount>> = MutableLiveData()
+    var logTransactionLiveData: MutableLiveData<List<TransactionModel>?> = MutableLiveData()
 
     @Inject
     lateinit var userRepositoryImpl: UserRepositoryImpl
     @Inject
     lateinit var bankAccountRepositoryImpl: BankAccountRepositoryImpl
+
+    @Inject
+    lateinit var transactionRepositoryImpl: TransactionRepositoryImpl
+
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -43,6 +50,11 @@ class CommonViewModel(mApplication: Application) : AndroidViewModel(mApplication
         }
     }
 
+    fun getAllTransaction(){
+        viewModelScope.launch {
+            logTransactionLiveData.value = transactionRepositoryImpl.getAllTransactions()
+        }
+    }
     fun getUserId() : Long = sessionManager.userId
 
 }

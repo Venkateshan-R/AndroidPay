@@ -7,6 +7,7 @@ import com.example.androidpay.ui.viewmodel.CommonViewModel
 import com.example.androidpay.ui.viewmodel.HomeViewModel
 import com.example.androidpay.ui.viewmodel.PayViewModel
 import com.example.androidpay.ui.viewmodel.SettingsViewModel
+import com.example.androidpay.ui.viewmodel.TransactionHistoryViewModel
 import com.example.androidpay.ui.viewmodel.UserViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -23,4 +24,5 @@ interface AppComponent {
     fun inject(homeViewModel: HomeViewModel)
     fun inject(payViewModel: PayViewModel)
     fun inject(addMoneyViewModel: AddMoneyViewModel)
+    fun inject(transactionHistoryViewModel: TransactionHistoryViewModel)
 }

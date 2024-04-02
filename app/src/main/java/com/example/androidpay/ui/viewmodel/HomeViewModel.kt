@@ -37,34 +37,25 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     val btnText: MutableLiveData<String> = MutableLiveData()
     val navigationLiveData: MutableLiveData<Int> = MutableLiveData()
 
-    fun getUserBankAccount(){
+    fun getUserBankAccount() {
         bankAccountRepositoryImpl.getBankAccountsForUser(getUserId()).observeForever {
             it?.let {
-                btnText.value = mApplication.getString(R.string.balance)+it.balance
-            } ?: let{
-                btnText.value = mApplication.getString(R.string.balance)+"r65"
+                btnText.value = mApplication.getString(R.string.balance) + it.getBalance()
+            } ?: let {
+                btnText.value = mApplication.getString(R.string.balance) + "r65"
             }
-        }
-    }
-    fun getButtonText(): LiveData<String> {
-        return btnText.also {
-            it.value = if (isUserLoggedIn()) mApplication.getString(R.string.logout)
-            else mApplication.getString(R.string.login)
         }
     }
 
     fun onPayClicked() {
-         navigationLiveData.value = R.id.action_homeFragment_to_payFragment
+        navigationLiveData.value = R.id.action_homeFragment_to_payFragment
     }
 
     fun onAddMoneyClick() {
-            navigationLiveData.value = R.id.action_homeFragment_to_addMoneyFragment
+        navigationLiveData.value = R.id.action_homeFragment_to_addMoneyFragment
     }
 
     fun getUserId(): Long = sessionManager.userId
-
-
-    fun isUserLoggedIn(): Boolean = getUserId() > 0
 
 
     //Need to check
