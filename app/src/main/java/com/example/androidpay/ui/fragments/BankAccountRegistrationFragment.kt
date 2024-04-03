@@ -16,7 +16,8 @@ import com.example.androidpay.ui.utils.showToast
 import com.example.androidpay.ui.viewmodel.BankAccRegViewModel
 import com.example.androidpay.ui.viewmodel.SettingsViewModel
 
-class BankAccountRegistrationFragment : BaseFragment<BankAccRegViewModel, FragmentBankAccountRegistrationBinding>() {
+class BankAccountRegistrationFragment :
+    BaseFragment<BankAccRegViewModel, FragmentBankAccountRegistrationBinding>() {
     override fun getBinding(): FragmentBankAccountRegistrationBinding =
         FragmentBankAccountRegistrationBinding.inflate(layoutInflater)
 
@@ -25,27 +26,37 @@ class BankAccountRegistrationFragment : BaseFragment<BankAccRegViewModel, Fragme
         setObservers()
     }
 
-    private fun setClickListener(){
+    private fun setClickListener() {
         //Need to check
-        viewBinding.header.ivBack.setOnClickListener {
+        viewBinding.ivClose.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        viewBinding.btnAddBankact.setOnClickListener { with(viewBinding) {
-            viewModel.addBankAccount(etFullname.text.toString(),etAccountno.text.toString(),etIfsccode.text.toString(),
-                etBankname.text.toString(),etPin.text.toString())
-        } }
+        viewBinding.btnAddBankact.setOnClickListener {
+            with(viewBinding) {
+                viewModel.addBankAccount(
+                    etFullname.text.toString(),
+                    etAccountno.text.toString(),
+                    etIfsccode.text.toString(),
+                    etBankname.text.toString(),
+                    etPin.text.toString()
+                )
+            }
+        }
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
                 is ResultData.Success -> {
                     context?.showToast(it.data)
-                    findNavController().popBackStack()
                 }
+
                 is ResultData.Failure -> context?.showToast(it.message)
             }
+        })
+        viewModel.navigationLiveData.observe(this, Observer {
+            findNavController().navigate(it)
         })
     }
 

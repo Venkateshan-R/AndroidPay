@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.SystemClock
 import android.view.View
 import android.widget.Toast
+import androidx.constraintlayout.widget.Group
 
 fun Context.showToast(msg : String){
     Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
@@ -16,6 +17,12 @@ fun View.setOnSafeClickListener(interval: Int = 1000, onSafeClick: (View) -> Uni
         if (currentClickTime - lastClickTime < interval) return@setOnClickListener
         lastClickTime = currentClickTime
         onSafeClick(it)
+    }
+}
+
+fun Group.setAllOnClickListener(listener: (View) -> Unit) {
+    referencedIds.forEach { id ->
+        rootView.findViewById<View>(id).setOnClickListener(listener)
     }
 }
 

@@ -3,173 +3,233 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/view_bg">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_currency"
+        style="@style/text_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:textCursorDrawable="@null" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_content"
-        style="@style/text_bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="@string/pay"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="2dp"
+        android:text="@string/rupee_symbol"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="@id/et_amount"
+        app:layout_constraintEnd_toStartOf="@id/et_amount"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toTopOf="@id/et_amount" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_upi"
-        style="@style/text_regular"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_amount"
+        style="@style/text_medium"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:padding="5dp"
-        android:text="@string/upi"
-        android:textColor="@color/white"
+        android:focusedByDefault="true"
+        android:hint="0"
+        android:background="@null"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_content" />
+        app:layout_constraintStart_toEndOf="@id/tv_currency"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_upi"
         style="@style/text_regular"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/et_bg_curved"
         android:hint="@string/enter_upi"
         android:imeOptions="actionNext"
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
-        android:textCursorDrawable="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_upi" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_amount"
-        style="@style/text_regular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:padding="5dp"
-        android:text="@string/amount"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_upi" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_amount"
-        style="@style/text_regular"
-        android:layout_width="match_parent"
-        android:maxLength="10"
-        android:inputType="numberDecimal"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/et_bg_curved"
-        android:hint="@string/enter_amount"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
-        android:textCursorDrawable="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_amount" />
-
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_remarks"
-        style="@style/text_regular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:padding="5dp"
-        android:text="@string/remarks"
-        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_amount" />
+
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_remarks"
         style="@style/text_regular"
         android:layout_width="match_parent"
-        android:maxLength="12"
-        android:inputType="number"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/et_bg_curved"
         android:hint="@string/enter_remarks"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:maxLines="5"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
-        android:textCursorDrawable="@null"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_remarks" />
+        app:layout_constraintTop_toBottomOf="@id/et_upi" />
+    <!--
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_upi"
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:padding="5dp"
+            android:text="@string/upi"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_upi"
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+
+            android:background="@drawable/et_bg_curved"
+            android:hint="@string/enter_upi"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_upi" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_amount"
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:padding="5dp"
+            android:text="@string/amount"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_upi" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_amount"
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+            android:maxLength="10"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/et_bg_curved"
+            android:hint="@string/enter_amount"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount" />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_remarks"
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:padding="5dp"
+            android:text="@string/remarks"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_amount" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_remarks"
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+            android:maxLength="12"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/et_bg_curved"
+            android:hint="@string/enter_remarks"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_remarks" />
+    -->
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_pay"
         style="@style/text_medium"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/btn_bg_curved"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_arrow_forward"
         android:text="@string/pay"
         android:textColor="@color/white"
         android:textSize="15sp"
+        android:tint="#FFFFFF"
+        app:backgroundTint="@color/blue"
+        app:fabCustomSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

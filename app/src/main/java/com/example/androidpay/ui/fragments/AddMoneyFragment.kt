@@ -29,11 +29,11 @@ class AddMoneyFragment : BaseFragment<AddMoneyViewModel, FragmentAddMoneyBinding
 
     fun setClickListeners() {
 
-        viewBinding.header.ivBack.setOnClickListener {
+        viewBinding.ivClose.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        viewBinding.btnAddamount.setOnSafeClickListener {
+        viewBinding.btnPay.setOnSafeClickListener {
             viewModel.addAmount(viewBinding.etAmount.text.toString())
         }
 

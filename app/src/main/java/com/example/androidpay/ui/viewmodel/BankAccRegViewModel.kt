@@ -11,15 +11,20 @@ import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.data.database.SessionManager
 import com.example.androidpay.data.model.BankAccount
 import com.example.androidpay.data.model.User
+import com.example.androidpay.ui.fragments.BankDetailsFragment
 import com.example.androidpay.ui.utils.Constants
 import com.example.androidpay.ui.utils.Constants.ACCOUNT_NUMBER_LENGTH
 import com.example.androidpay.ui.utils.Constants.AUTHENTICATION_PIN
+import com.example.androidpay.ui.utils.DataHolder
 import com.example.androidpay.ui.utils.ResultData
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApplication) {
     var resultLiveData: MutableLiveData<ResultData<String>> = MutableLiveData()
+    val navigationLiveData: MutableLiveData<Int> = MutableLiveData()
+    val bankAccountLiveData: MutableLiveData<BankAccount> = MutableLiveData()
+    val valuesTxt: MutableLiveData<DataHolder<BankDetailsFragment.BANK_DATAS>> = MutableLiveData()
 
     init {
         (mApplication as MyApplication).appComponent.inject(this)
@@ -73,6 +78,8 @@ class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApp
                     resultLiveData.value =
                         ResultData.Success(mApplication.getString(R.string.bank_account_added_successfully))
 
+                    navigationLiveData.value =
+                        R.id.action_bankAccountRegistrationFragment_to_bankDetailsFragment
 
                 } else {
                     resultLiveData.value =
@@ -82,7 +89,6 @@ class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApp
         } else {
             resultLiveData.value = ResultData.Failure(validationError)
         }
-
     }
 
     private fun validateUserInput(
@@ -114,7 +120,35 @@ class BankAccRegViewModel(val mApplication: Application) : AndroidViewModel(mApp
         return ""
     }
 
-    fun generateUpiId(mobileNumber: String, bankName: String) = "${mobileNumber}@${bankName}"
+    fun getUserBankAccount() {
+        viewModelScope.launch {
+            val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
+            userBank?.let {
+                valuesTxt.value = DataHolder.Datas(
+                    BankDetailsFragment.BANK_DATAS.AMOUNT,
+                    mApplication.getString(R.string.rupee_symbol) + it.getBalance()
+                )
+                valuesTxt.value =
+                    DataHolder.Datas(BankDetailsFragment.BANK_DATAS.NAME, it.userFullName)
+                valuesTxt.value = DataHolder.Datas(
+                    BankDetailsFragment.BANK_DATAS.ACCOUNT_NUMBER,
+                    it.accountNumber.toString()
+                )
+                valuesTxt.value =
+                    DataHolder.Datas(BankDetailsFragment.BANK_DATAS.IFSC_CODE, it.ifscCode)
+                valuesTxt.value = DataHolder.Datas(BankDetailsFragment.BANK_DATAS.UPI, it.upiId)
+                valuesTxt.value =
+                    DataHolder.Datas(BankDetailsFragment.BANK_DATAS.PIN, it.PIN.toString())
+                valuesTxt.value = DataHolder.Datas(
+                    BankDetailsFragment.BANK_DATAS.BANK_NAME,
+                    it.bankName.toString()
+                )
+            }
+        }
+    }
+
+    private fun generateUpiId(mobileNumber: String, bankName: String) =
+        "${mobileNumber}@${bankName}"
 
 
 }

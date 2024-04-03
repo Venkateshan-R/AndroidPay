@@ -3,43 +3,313 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/view_bg">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_accbal"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_gudiline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Bal : -0"
-        android:textColor="@color/white"
+        app:layout_constraintGuide_percent=".05"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_gudiline"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent=".95"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_header"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_upi_logo"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_transfer"
+        style="@style/text_bold"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/transfer_money"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/iv_header"
+        app:textAllCaps="true" />
 
-        />
-
-    <TextView
-        android:id="@+id/tv_pay"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pay"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/tv_addmoney"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_accbal" />
+        app:constraint_referenced_ids="iv_sendmoney,tv_send" />
 
-    <TextView
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btn_addmoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_addmoney,tv_addmoney" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btn_transaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_transaction_forward,iv_transaction,tv_transaction" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btn_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_account,iv_account_forward,tv_bankaccounts" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_sendmoney"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_send"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/tv_transfer" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_send"
+        style="@style/text_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Send"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_sendmoney"
+        app:layout_constraintStart_toStartOf="@id/iv_sendmoney"
+        app:layout_constraintTop_toBottomOf="@id/iv_sendmoney" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_addmoney"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_addmoney"
+        app:layout_constraintStart_toEndOf="@id/iv_sendmoney"
+        app:layout_constraintTop_toBottomOf="@id/tv_transfer" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_addmoney"
+        style="@style/text_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add money"
-        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:text="@string/add_money"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_addmoney"
+        app:layout_constraintStart_toStartOf="@id/iv_addmoney"
+        app:layout_constraintTop_toBottomOf="@id/iv_addmoney" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_myinfo"
+        style="@style/text_bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:text="@string/my_information"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/tv_send"
+        app:textAllCaps="true" />
 
-        app:layout_constraintStart_toEndOf="@+id/tv_pay"
-        app:layout_constraintTop_toBottomOf="@id/tv_accbal" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_transaction"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_transaction"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/tv_myinfo" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_transaction"
+        style="@style/text_medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/transaction"
+        app:layout_constraintBottom_toBottomOf="@id/iv_transaction"
+        app:layout_constraintEnd_toStartOf="@id/iv_transaction_forward"
+        app:layout_constraintStart_toEndOf="@id/iv_transaction"
+        app:layout_constraintTop_toTopOf="@id/iv_transaction"
+        app:textAllCaps="true" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_transaction_forward"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="@id/tv_transaction"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintTop_toTopOf="@id/tv_transaction" />
+
+    <View
+        android:id="@+id/trans_border"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/iv_transaction" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_account"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_bank"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/trans_border" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_bankaccounts"
+        style="@style/text_medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/accounts"
+        app:layout_constraintBottom_toBottomOf="@id/iv_account"
+        app:layout_constraintEnd_toStartOf="@id/iv_account_forward"
+        app:layout_constraintStart_toEndOf="@id/iv_account"
+        app:layout_constraintTop_toTopOf="@id/iv_account"
+        app:textAllCaps="true" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_account_forward"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="@id/tv_bankaccounts"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/trans_border"
+        app:layout_constraintTop_toTopOf="@id/tv_bankaccounts" />
+
+    <View
+        android:id="@+id/account_border"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/iv_account" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/account_border" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_profile"
+        style="@style/text_medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/profile"
+        app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+        app:layout_constraintEnd_toStartOf="@id/iv_account_forward"
+        app:layout_constraintStart_toEndOf="@id/iv_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_profile"
+        app:textAllCaps="true" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_profile_forward"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="@id/tv_profile"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintTop_toTopOf="@id/tv_profile" />
+
+    <View
+        android:id="@+id/profile_border"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_settings"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/profile_border" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_settings"
+        style="@style/text_medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/settings"
+        app:layout_constraintBottom_toBottomOf="@id/iv_settings"
+        app:layout_constraintEnd_toStartOf="@id/iv_settings_forward"
+        app:layout_constraintStart_toEndOf="@id/iv_settings"
+        app:layout_constraintTop_toTopOf="@id/iv_settings"
+        app:textAllCaps="true" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_settings_forward"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="@id/tv_settings"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintTop_toTopOf="@id/tv_settings" />
+
+    <View
+        android:id="@+id/settings_border"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintEnd_toStartOf="@id/end_gudiline"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/iv_settings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

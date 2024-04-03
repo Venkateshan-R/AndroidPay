@@ -41,7 +41,7 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
             )
         }
 
-       val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext())
         builder.setView(binding.root)
         alertDialog = builder.create()
 
@@ -53,6 +53,9 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
                 viewBinding.etUpi.text.toString(), viewBinding.etAmount.text.toString(),
                 viewBinding.etRemarks.text.toString()
             )
+        }
+        viewBinding.ivClose.setOnSafeClickListener {
+            findNavController().popBackStack()
         }
     }
 

@@ -42,7 +42,7 @@ class RegisterFragment : BaseFragment<UserViewModel, FragmentRegisterBinding>() 
 
     private fun setclickListeners() {
         //Need to check
-        viewBinding.header.ivBack.setOnClickListener { findNavController().popBackStack() }
+        viewBinding.ivClose.setOnClickListener { findNavController().popBackStack() }
         viewBinding.btnRegister.setOnSafeClickListener {
             viewModel.registerUser(
                 viewBinding.etMobile.text.toString(),

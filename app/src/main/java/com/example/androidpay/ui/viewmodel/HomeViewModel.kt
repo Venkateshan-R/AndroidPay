@@ -13,6 +13,7 @@ import com.example.androidpay.data.repository.UserRepositoryImpl
 import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.data.database.SessionManager
+import com.example.androidpay.ui.utils.showToast
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,6 +50,23 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
 
     fun onPayClicked() {
         navigationLiveData.value = R.id.action_homeFragment_to_payFragment
+    }
+
+    fun onTransactionClicked() {
+        navigationLiveData.value = R.id.action_homeFragment_to_transactionFragment
+    }
+    fun onSettingsClicked() {
+        navigationLiveData.value = R.id.settingsFragment
+    }
+
+    fun onAccountClicked() {
+        viewModelScope.launch {
+            val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
+            if (userBank == null)
+                navigationLiveData.value = R.id.bankAccountRegistrationFragment
+            else
+                navigationLiveData.value = R.id.action_homeFragment_to_bankDetailsFragment
+        }
     }
 
     fun onAddMoneyClick() {

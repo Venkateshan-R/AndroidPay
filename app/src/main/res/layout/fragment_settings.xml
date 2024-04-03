@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/view_bg">
 
+
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_Addaccount"
         style="@style/text_medium"

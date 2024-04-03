@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/view_bg">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textCursorDrawable="@null"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_content"
@@ -30,15 +30,15 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="@string/create_an_account"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/iv_close" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_firstname"
-        style="@style/text_regular"
+        style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -46,7 +46,7 @@
         android:layout_marginEnd="30dp"
         android:padding="5dp"
         android:text="@string/first_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_content" />
@@ -67,8 +67,8 @@
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_firstname" />
@@ -76,7 +76,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_latname"
-        style="@style/text_regular"
+        style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -84,7 +84,7 @@
         android:layout_marginEnd="30dp"
         android:padding="5dp"
         android:text="@string/last_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_firstname" />
@@ -103,8 +103,8 @@
         android:padding="10dp"
         android:textCursorDrawable="@null"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_latname" />
@@ -112,7 +112,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_mobile"
-        style="@style/text_regular"
+        style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -120,7 +120,7 @@
         android:layout_marginEnd="30dp"
         android:padding="5dp"
         android:text="@string/mobile_number"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_lastname" />
@@ -141,15 +141,15 @@
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_mobile" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_password"
-        style="@style/text_regular"
+        style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -157,7 +157,7 @@
         android:layout_marginEnd="30dp"
         android:padding="5dp"
         android:text="@string/password"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_mobile" />
@@ -176,8 +176,8 @@
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_password" />

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_flow"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_homeFragment_to_payFragment"
             app:destination="@id/payFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bankDetailsFragment"
+            app:destination="@id/bankDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bankAccountRegistrationFragment"
+            app:destination="@id/bankAccountRegistrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionFragment"
@@ -65,7 +74,11 @@
     <fragment
         android:id="@+id/bankAccountRegistrationFragment"
         android:name="com.example.androidpay.ui.fragments.BankAccountRegistrationFragment"
-        android:label="BankAccountRegistrationFragment" />
+        android:label="BankAccountRegistrationFragment" >
+        <action
+            android:id="@+id/action_bankAccountRegistrationFragment_to_bankDetailsFragment"
+            app:destination="@id/bankDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addMoneyFragment"
         android:name="com.example.androidpay.ui.fragments.AddMoneyFragment"
@@ -76,4 +89,9 @@
         android:name="com.example.androidpay.ui.fragments.PayFragment"
         android:label="fragment_pay"
         tools:layout="@layout/fragment_pay" />
+    <fragment
+        android:id="@+id/bankDetailsFragment"
+        android:name="com.example.androidpay.ui.fragments.BankDetailsFragment"
+        android:label="fragment_bank_details"
+        tools:layout="@layout/fragment_bank_details" />
 </navigation>

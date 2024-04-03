@@ -8,19 +8,19 @@
     <style name="Theme.AndroidPay" parent="Base.Theme.AndroidPay" />
 
     <style name="text_bold" parent="android:Widget.TextView">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/bold</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="text_regular" parent="android:Widget.TextView">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/light</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="text_medium" parent="android:Widget.TextView">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/medium</item>
         <item name="android:textSize">12sp</item>
     </style>

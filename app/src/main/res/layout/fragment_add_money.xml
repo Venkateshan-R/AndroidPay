@@ -3,95 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/view_bg">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:textCursorDrawable="@null" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_content"
-        style="@style/text_bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="@string/add_money"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_amount"
-        style="@style/text_regular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:padding="5dp"
-        android:text="@string/amount"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_content" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_amount"
-        style="@style/text_regular"
-        android:inputType="number"
-        android:maxLength="4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/et_bg_curved"
-        android:hint="@string/enter_amount"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint"
-        android:textCursorDrawable="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_amount" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_addamount"
         style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/btn_bg_curved"
+        android:gravity="center"
+        android:padding="5dp"
         android:text="@string/add_money"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_currency"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_currency"
+        style="@style/text_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rupee_symbol"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="@id/et_amount"
+        app:layout_constraintEnd_toStartOf="@id/et_amount"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_amount" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_amount"
+        style="@style/text_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:focusedByDefault="true"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_currency"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_pay"
+        style="@style/text_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_arrow_forward"
+        android:text="@string/pay"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:tint="#FFFFFF"
+        app:backgroundTint="@color/blue"
+        app:fabCustomSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,22 +12,32 @@ import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.ui.utils.showToast
 import com.example.androidpay.ui.viewmodel.TransactionHistoryViewModel
 
-class TransactionHistoryFragment : BaseFragment<TransactionHistoryViewModel, FragmentTransactionBinding>() {
+class TransactionHistoryFragment :
+    BaseFragment<TransactionHistoryViewModel, FragmentTransactionBinding>() {
     val adapter = TransactionHistoryAdapter()
-    override fun getBinding(): FragmentTransactionBinding = FragmentTransactionBinding.inflate(layoutInflater)
+    override fun getBinding(): FragmentTransactionBinding =
+        FragmentTransactionBinding.inflate(layoutInflater)
 
     override fun initView() {
         setUpRecyclerview()
         initObservers()
+        setClickListners()
     }
 
-    fun setUpRecyclerview()= with(viewBinding){
+    fun setClickListners() {
+        viewBinding.ivClose.setOnClickListener {
+            findNavController()
+        }
+    }
+
+    fun setUpRecyclerview() = with(viewBinding) {
         rvTransactions.layoutManager = LinearLayoutManager(context)
+        adapter.userId = viewModel.getUserId()
         rvTransactions.adapter = adapter;
 
     }
 
-    private fun initObservers(){
+    private fun initObservers() {
         viewModel.getAllTransactionHistory()
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
@@ -35,6 +45,7 @@ class TransactionHistoryFragment : BaseFragment<TransactionHistoryViewModel, Fra
                     context?.showToast("Success")
                     adapter.transactionList = it.data
                 }
+
                 is ResultData.Failure -> context?.showToast(it.message)
             }
         })

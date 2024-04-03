@@ -24,47 +24,37 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
 
     override fun initView() {
         (application as MyApplication).appComponent.inject(this)
-
-        val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val bottomNavigation = viewBinding.bottomNavigation
-        bottomNavigation.setupWithNavController(navHostFragment.navController)
-        navHostFragment.navController.addOnDestinationChangedListener(object : NavController.OnDestinationChangedListener{
-            override fun onDestinationChanged(
-                controller: NavController,
-                destination: NavDestination,
-                arguments: Bundle?
-            ) {
-                when(destination.id){
-                    R.id.homeFragment ,
-                    R.id.settingsFragment ,
-                    R.id.transactionFragment -> showBottomNavigationView()
-                    else -> hideBottomNavigationView()
-                }
-            }
-
-        })
-
+        setUpNavigation()
         initPrint()
 
     }
 
-    fun initPrint(){
-        viewModel.logLiveData.observe(this, Observer {
-            Log.d("RoomDatas",it.toString())
-        })
-        viewModel.logBankLiveData.observe(this, Observer {
-            Log.d("RoomDatas",it.toString())
-        })
-        viewModel.logTransactionLiveData.observe(this, Observer {
-            Log.d("RoomDatas",it.toString())
-        })
+    fun setUpNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val inflater = navHostFragment.navController.navInflater
+        val graph = inflater.inflate(R.navigation.navigation_graph)
+
+        if (viewModel.getUserId() > 0) {
+            graph.setStartDestination(R.id.homeFragment)
+        } else {
+            graph.setStartDestination(R.id.loginFragment)
+        }
+        val navController = navHostFragment.navController
+        navController.setGraph(graph, intent.extras)
     }
 
-    fun showBottomNavigationView() {
-        viewBinding.bottomNavigation.visibility = View.VISIBLE
-    }
-    fun hideBottomNavigationView() {
-        viewBinding.bottomNavigation.visibility = View.GONE
+
+    fun initPrint() {
+        viewModel.logLiveData.observe(this, Observer {
+            Log.d("RoomDatas", it.toString())
+        })
+        viewModel.logBankLiveData.observe(this, Observer {
+            Log.d("RoomDatas", it.toString())
+        })
+        viewModel.logTransactionLiveData.observe(this, Observer {
+            Log.d("RoomDatas", it.toString())
+        })
     }
 
     override fun onResume() {
