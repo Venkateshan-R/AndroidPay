@@ -4,6 +4,7 @@ package com.example.androidpay.ui.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -16,6 +17,8 @@ import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.ui.viewmodel.CommonViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.setupWithNavController
+import com.example.androidpay.data.interfaces.OnBackPressedListener
+import com.example.androidpay.ui.utils.showToast
 
 
 class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
@@ -62,6 +65,15 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
         viewModel.getallusers()
         viewModel.getAllbankAcc()
         viewModel.getAllTransaction()
+    }
+
+    override fun onBackPressed() {
+        val fragment =( supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).getChildFragmentManager().getFragments().get(0);
+        if (fragment is OnBackPressedListener) {
+            fragment.onBackPressed()
+        } else {
+            super.onBackPressed()
+        }
     }
 
 }

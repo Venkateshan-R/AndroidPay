@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.androidpay.R
+import com.example.androidpay.data.interfaces.OnBackPressedListener
 import com.example.androidpay.databinding.FragmentBankDetailsBinding
 import com.example.androidpay.ui.base.BaseFragment
-import com.example.androidpay.ui.utils.DataHolder
+import com.example.androidpay.ui.utils.showToast
 import com.example.androidpay.ui.viewmodel.BankAccRegViewModel
 
 
-class BankDetailsFragment : BaseFragment<BankAccRegViewModel, FragmentBankDetailsBinding>() {
+class BankDetailsFragment : BaseFragment<BankAccRegViewModel, FragmentBankDetailsBinding>(),
+    OnBackPressedListener {
     override fun getBinding(): FragmentBankDetailsBinding =
         FragmentBankDetailsBinding.inflate(layoutInflater)
 
@@ -26,27 +28,31 @@ class BankDetailsFragment : BaseFragment<BankAccRegViewModel, FragmentBankDetail
     fun setClickListeners() {
         //need to check to handle add transaction
         viewBinding.ivClose.setOnClickListener {
-            findNavController().popBackStack()
+            backAction()
         }
     }
 
     fun setObservers() {
         viewModel.getUserBankAccount()
-        viewModel.valuesTxt.observe(this, Observer {
-            when ((it as DataHolder.Datas).tag) {
-                BANK_DATAS.AMOUNT -> viewBinding.tvBalanceValue.text = it.value
-                BANK_DATAS.NAME -> viewBinding.tvNameValue.text = it.value
-                BANK_DATAS.ACCOUNT_NUMBER -> viewBinding.tvAccountnoValue.text = it.value
-                BANK_DATAS.IFSC_CODE -> viewBinding.tvIfscValue.text = it.value
-                BANK_DATAS.UPI -> viewBinding.tvUpiValue.text = it.value
-                BANK_DATAS.PIN -> viewBinding.tvPinValue.text = it.value
-                BANK_DATAS.BANK_NAME -> {}
+        viewModel.bankAccountLiveData.observe(this, Observer {
+            with(viewBinding) {
+                tvBalanceValue.text = getString(R.string.rupee_symbol) + it.getFormattedBalace()
+                tvNameValue.text = it.userFullName
+                tvAccountnoValue.text = it.accountNumber.toString()
+                tvIfscValue.text = it.ifscCode
+                tvUpiValue.text = it.upiId
+                tvBanknameValue.text = it.bankName
+                tvPinValue.text = it.PIN.toString()
             }
         })
     }
 
-    enum class BANK_DATAS {
-        NAME, AMOUNT, ACCOUNT_NUMBER, IFSC_CODE, UPI, PIN,BANK_NAME
+    override fun onBackPressed() {
+        backAction()
+    }
+
+    fun backAction() {
+        findNavController().popBackStack(R.id.homeFragment, false)
     }
 
 }

@@ -76,6 +76,18 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="iv_account,iv_account_forward,tv_bankaccounts" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btn_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_profile_forward,iv_profile,tv_profile" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btn_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_settings,iv_settings_forward,tv_settings" />
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_sendmoney"

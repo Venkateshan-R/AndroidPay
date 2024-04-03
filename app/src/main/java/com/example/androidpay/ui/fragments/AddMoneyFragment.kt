@@ -44,12 +44,16 @@ class AddMoneyFragment : BaseFragment<AddMoneyViewModel, FragmentAddMoneyBinding
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
                 is ResultData.Success -> {
-                    context?.showToast("Success")
-                    findNavController().popBackStack()
+                    context?.showToast(it.data)
+                   // findNavController().popBackStack()
                 }
 
                 is ResultData.Failure -> context?.showToast(it.message)
             }
+        })
+
+        viewModel.navigationLiveData.observe(this, Observer {
+            findNavController().navigate(it)
         })
     }
 

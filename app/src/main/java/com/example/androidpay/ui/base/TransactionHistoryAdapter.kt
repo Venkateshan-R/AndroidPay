@@ -26,22 +26,31 @@ class TransactionHistoryAdapter : RecyclerView.Adapter<TransactionHistoryAdapter
         fun bindData(transactionModel: TransactionModel) = with(binding) {
             tvAmount.text = formatAmountTxt(transactionModel)
             tvAmount.setTextColor(getTextcolor(transactionModel))
-            tvName.text = transactionModel.receiverUPIId
+            tvName.text = formatNameTxt(transactionModel)
             tvRemarks.text = transactionModel.remarks
             tvDate.text = timestampToDayMonthYearFormat(transactionModel.transactionDate)
         }
 
         fun formatAmountTxt(transactionModel: TransactionModel): String =
-            if (transactionModel.senderId == userId)
-                "- " + getContext().getString(R.string.rupee_symbol) + transactionModel.amount
+            if (transactionModel.receiverId == userId)
+                "+ " + getContext().getString(R.string.rupee_symbol) + transactionModel.getFormattedBalace()
             else
-                "+ " + getContext().getString(R.string.rupee_symbol) + transactionModel.amount
+                "- " + getContext().getString(R.string.rupee_symbol) + transactionModel.getFormattedBalace()
+
+        fun formatNameTxt(transactionModel: TransactionModel): String =
+            if (transactionModel.receiverId == transactionModel.senderId)
+                "Self Transfer"
+            else if (transactionModel.receiverId == userId)
+                "From " + transactionModel.senderName + "\n" + transactionModel.senderUPIId
+            else
+                "To " + transactionModel.receiverName + "\n" + transactionModel.receiverUPIId
+
 
         fun getTextcolor(transactionModel: TransactionModel): Int =
-            if (transactionModel.senderId == userId)
-                getContext().getColor(R.color.amount_deducted)
-            else
+            if (transactionModel.receiverId == userId)
                 getContext().getColor(R.color.amount_added)
+            else
+                getContext().getColor(R.color.amount_deducted)
 
 
         fun getContext() = binding.root.context
@@ -52,7 +61,13 @@ class TransactionHistoryAdapter : RecyclerView.Adapter<TransactionHistoryAdapter
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(ItemTransactionHistoryBinding.inflate(LayoutInflater.from(parent.context)))
+        ViewHolder(
+            ItemTransactionHistoryBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun getItemCount(): Int = transactionList?.size ?: 0
 

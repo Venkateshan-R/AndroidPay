@@ -3,10 +3,11 @@ package com.example.androidpay.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.androidpay.ui.utils.Constants
+import java.text.DecimalFormat
 
 @Entity
 data class BankAccount(
-    private @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) private val id: Int = 0,
     val userId: Long,
     val userFullName: String,
     val accountNumber: Long,
@@ -16,16 +17,8 @@ data class BankAccount(
     val upiId: String,
     val perDayTransactionLimit: Int = Constants.PER_DAY_TRANSACTION_LIMIT,
     val perTransactionLimit: Int = Constants.PER_TRANSACTION_LIMIT,
+    var balance: Double = 0.0
 ) {
-
-    private var balance: Double = 0.0
-
-    fun getBalance() = balance
-    fun setBalance(balance : Double){
-        this.balance = balance
-    }
-
-
 
     public fun addBalance(deposit : Double)
     {
@@ -34,6 +27,10 @@ data class BankAccount(
     public fun deductBalance(deduction : Double)
     {
         balance-=deduction
+    }
+
+    public fun getFormattedBalace() : String{
+        return DecimalFormat("#,###.00").format(balance)
     }
 
     fun getId(): Int {

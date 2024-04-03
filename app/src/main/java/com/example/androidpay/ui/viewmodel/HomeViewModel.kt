@@ -41,7 +41,7 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     fun getUserBankAccount() {
         bankAccountRepositoryImpl.getBankAccountsForUser(getUserId()).observeForever {
             it?.let {
-                btnText.value = mApplication.getString(R.string.balance) + it.getBalance()
+                btnText.value = mApplication.getString(R.string.balance) + it.balance
             } ?: let {
                 btnText.value = mApplication.getString(R.string.balance) + "r65"
             }
@@ -49,28 +49,48 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     }
 
     fun onPayClicked() {
-        navigationLiveData.value = R.id.action_homeFragment_to_payFragment
+        viewModelScope.launch {
+            val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
+            if (userBank == null)
+                resultLiveData.value =
+                    ResultData.Failure(mApplication.getString(R.string.please_add_bank_account))
+            else
+                navigationLiveData.value = R.id.action_homeFragment_to_payFragment
+        }
     }
 
     fun onTransactionClicked() {
         navigationLiveData.value = R.id.action_homeFragment_to_transactionFragment
     }
+
     fun onSettingsClicked() {
-        navigationLiveData.value = R.id.settingsFragment
+        navigationLiveData.value = R.id.action_homeFragment_to_settingsFragment
+    }
+
+    fun onProfileClicked() {
+        navigationLiveData.value = R.id.action_homeFragment_to_profileFragment
     }
 
     fun onAccountClicked() {
         viewModelScope.launch {
             val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
             if (userBank == null)
-                navigationLiveData.value = R.id.bankAccountRegistrationFragment
+                navigationLiveData.value =
+                    R.id.action_homeFragment_to_bankAccountRegistrationFragment
             else
                 navigationLiveData.value = R.id.action_homeFragment_to_bankDetailsFragment
         }
     }
 
     fun onAddMoneyClick() {
-        navigationLiveData.value = R.id.action_homeFragment_to_addMoneyFragment
+        viewModelScope.launch {
+            val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
+            if (userBank == null)
+                resultLiveData.value =
+                    ResultData.Failure(mApplication.getString(R.string.please_add_bank_account))
+            else
+                navigationLiveData.value = R.id.action_homeFragment_to_addMoneyFragment
+        }
     }
 
     fun getUserId(): Long = sessionManager.userId

@@ -39,7 +39,7 @@
         android:background="@null"
         android:imeOptions="actionNext"
         android:inputType="numberDecimal"
-        android:maxLength="10"
+        android:maxLength="8"
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"

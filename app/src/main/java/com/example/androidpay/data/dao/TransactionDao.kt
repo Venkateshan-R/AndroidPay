@@ -19,7 +19,7 @@ interface TransactionDao {
 
     @Query("SELECT * FROM TransactionModel WHERE senderUPIId = :upiId OR receiverUPIId = :upiId ORDER BY transactionDate DESC")
     suspend fun getTransactionByUpiId(upiId: String): List<TransactionModel>
-    @Query("SELECT * FROM TransactionModel WHERE (senderUPIId = :upiId OR receiverUPIId = :upiId) AND transactionDate >= :dayStart AND transactionDate < :dayEnd")
+    @Query("SELECT * FROM TransactionModel WHERE (senderUPIId = :upiId AND receiverUPIId != :upiId) OR (receiverUPIId = :upiId AND senderUPIId != :upiId) AND transactionDate >= :dayStart AND transactionDate < :dayEnd")
     suspend fun getTodaysTransactions(dayStart: Long, dayEnd: Long,upiId: String): List<TransactionModel>
 
 

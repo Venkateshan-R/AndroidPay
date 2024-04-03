@@ -146,6 +146,33 @@
         app:textAllCaps="false" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_bankname_title"
+        style="@style/text_regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/bank_name"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/tv_ifsc_value"
+        app:textAllCaps="false" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_bankname_value"
+        style="@style/text_medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Indian bank"
+        android:textColor="@color/blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_gudiline"
+        app:layout_constraintTop_toBottomOf="@id/tv_bankname_title"
+        app:textAllCaps="false" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_upi_title"
         style="@style/text_regular"
         android:layout_width="0dp"
@@ -156,7 +183,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/left_gudiline"
-        app:layout_constraintTop_toBottomOf="@id/tv_ifsc_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_bankname_value"
         app:textAllCaps="false" />
 
     <androidx.appcompat.widget.AppCompatTextView

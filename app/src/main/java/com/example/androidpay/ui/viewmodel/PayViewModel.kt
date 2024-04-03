@@ -27,6 +27,8 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
 
     var resultLiveData: MutableLiveData<ResultData<String>> = MutableLiveData()
     var popUpLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val navigationLiveData: MutableLiveData<Int> = MutableLiveData()
+
 
     @Inject
     lateinit var userRepositoryImpl: UserRepositoryImpl
@@ -64,7 +66,7 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
                             resultLiveData.value =
                                 ResultData.Failure(mApplication.getString(R.string.amount_cannot_be_transferred_to_same_account))
 
-                        } else if (currentBank.getBalance() < amount.toDouble()) {
+                        } else if (currentBank.balance < amount.toDouble()) {
                             resultLiveData.value =
                                 ResultData.Failure((mApplication.getString(R.string.insufficient_balance)))
 
@@ -129,7 +131,9 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
                 receiverUPIId = receiverBank.upiId,
                 amount = amount.toDouble(),
                 transactionDate = getTranasactionTime(),
-                remarks = remarks
+                remarks = remarks,
+                receiverName = receiverBank.userFullName,
+                senderName = currentBank.userFullName
             )
 
             transactionRepositoryImpl.saveTransaction(transactionModel)
@@ -139,6 +143,7 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
             popUpLiveData.value = false
             resultLiveData.value =
                 ResultData.Success(mApplication.getString(R.string.amount_transfered_successfully))
+            navigationLiveData.value = R.id.action_payFragment_to_transactionhistoryfragemnt
 
 
         }

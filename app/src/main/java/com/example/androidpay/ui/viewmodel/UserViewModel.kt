@@ -30,6 +30,15 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     @Inject
     lateinit var sessionManager: SessionManager
 
+    fun getCurrentUser(){
+        viewModelScope.launch {
+            userRepositoryImpl.getUserByuserId(getUserId())?.let {
+                resultLiveData.value =ResultData.Success(it)
+            }
+
+        }
+    }
+
     //user register functionality
     fun registerUser(
         mobileNumber: String,
@@ -112,6 +121,7 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
 
     private fun storeUserId(id: Long) {
         sessionManager.userId = id
-
     }
+
+    private fun getUserId()=  sessionManager.userId
 }

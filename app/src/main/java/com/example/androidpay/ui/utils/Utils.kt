@@ -22,10 +22,17 @@ fun View.setOnSafeClickListener(interval: Int = 1000, onSafeClick: (View) -> Uni
 
 fun Group.setAllOnClickListener(listener: (View) -> Unit) {
     referencedIds.forEach { id ->
-        rootView.findViewById<View>(id).setOnClickListener(listener)
+        rootView.findViewById<View>(id).setOnSafeClickListener(onSafeClick =listener)
     }
 }
 
 fun View.visible() { visibility = View.VISIBLE }
 fun View.gone() { visibility = View.GONE }
+
+fun View.setVisible(isVisible: Boolean) {
+    visibility = when (isVisible) {
+        true -> View.VISIBLE
+        else -> View.GONE
+    }
+}
 

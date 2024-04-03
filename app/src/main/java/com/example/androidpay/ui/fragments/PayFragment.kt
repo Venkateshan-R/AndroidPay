@@ -63,8 +63,7 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
                 is ResultData.Success -> {
-                    context?.showToast("Success")
-                    findNavController().popBackStack()
+                    context?.showToast(it.data)
                 }
 
                 is ResultData.Failure -> context?.showToast(it.message)
@@ -76,6 +75,10 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
             } else {
                 dismissPopup()
             }
+        })
+
+        viewModel.navigationLiveData.observe(this, Observer {
+            findNavController().navigate(it)
         })
     }
 

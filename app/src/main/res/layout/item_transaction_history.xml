@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:layout_margin="5dp"
+    android:padding="10dp"
+    android:background="@drawable/bg_transaction"
+    android:layout_margin="10dp"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -12,10 +13,10 @@
         style="@style/text_medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="1"
+        android:maxLines="2"
         android:text="Venkateshan R"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@id/tv_amount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,19 +41,19 @@
         android:maxLines="6"
         android:text="lorem 12 check with that adhdfja ajshfkjhsadfkj asjdkfhsadkjfhsadkj adfsssssss fadsssssssss adsfffff dsfkjl dsklfjj slkdjflsdjf lskjdf klsdjf kljsd fkljd lkfj skl fdklsj dkfljsd kfljsdklfj sdklfj skdlfj lksjd lksdj flksdj fksldj flksjflksdjflskjflksjflksjdfc"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_amount"
-        style="@style/text_regular"
+        style="@style/text_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:text="+20000"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
