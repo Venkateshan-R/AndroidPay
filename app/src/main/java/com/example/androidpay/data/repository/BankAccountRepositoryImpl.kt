@@ -17,7 +17,6 @@ class BankAccountRepositoryImpl @Inject constructor(private val bankAccountDao: 
 
     override suspend fun getAllBankAccount(): List<BankAccount> = bankAccountDao.getAllBankAcc()
 
-    override fun getBankAccountsForUser(userId: Long): LiveData<BankAccount?> = bankAccountDao.getBankAccountsForUser(userId)
     override suspend fun getBankAccount(userId: Long): BankAccount? =bankAccountDao.getBankAccount(userId)
 
     override suspend fun getBankAccountByAccNo(accountNo: Long): BankAccount? = bankAccountDao.getBankAccountByAccNo(accountNo)

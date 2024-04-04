@@ -38,15 +38,6 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     val btnText: MutableLiveData<String> = MutableLiveData()
     val navigationLiveData: MutableLiveData<Int> = MutableLiveData()
 
-    fun getUserBankAccount() {
-        bankAccountRepositoryImpl.getBankAccountsForUser(getUserId()).observeForever {
-            it?.let {
-                btnText.value = mApplication.getString(R.string.balance) + it.balance
-            } ?: let {
-                btnText.value = mApplication.getString(R.string.balance) + "r65"
-            }
-        }
-    }
 
     fun onPayClicked() {
         viewModelScope.launch {
@@ -102,9 +93,4 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
 
     fun getUserId(): Long = sessionManager.userId
 
-
-    //Need to check
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

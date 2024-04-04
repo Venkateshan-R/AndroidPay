@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidPay</string>
+    <string name="app_name">ZohoPay</string>
     <string name="settings">Account Settings</string>
 
 
@@ -33,7 +33,6 @@
     <string name="enter_4_digit_pin">Enter 4 Digit PIN</string>
     <string name="bank_account_alredy_linked_with_another_user">Bank Account Alredy Linked with Another User</string>
     <string name="balance">"Account Balance"</string>
-    <string name="account_already_added">Account Already Added</string>
     <string name="pay">Pay</string>
     <string name="add_money">Add Money</string>
     <string name="please_add_bank_account">Please add bank account</string>
@@ -51,8 +50,6 @@
     <string name="transfer_failed_amount_exceeds_receiver_s_limit">Transfer failed: Amount exceeds receiver\'s limit</string>
     <string name="unable_to_transfer_receiver_s_daily_transfer_limit_has_been_reached">Unable to transfer. Receiver\'s daily transfer limit has been reached</string>
     <string name="unable_to_transfer_your_daily_transfer_limit_has_been_reached">Unable to transfer. your daily transfer limit has been reached</string>
-    <string name="verify">Verify</string>
-    <string name="enter_pin">Enter Pin</string>
     <string name="invalid_pin">Invalid Pin</string>
     <string name="transfer_money">Transfer Money</string>
     <string name="my_information">My Information</string>

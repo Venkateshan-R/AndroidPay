@@ -7,8 +7,6 @@ interface BankAccountRepository {
     suspend fun insertBankAccount(bankAccount: BankAccount)
     suspend fun updateBankAccount(bankAccount: BankAccount)
     suspend fun getAllBankAccount(): List<BankAccount>
-
-    fun getBankAccountsForUser(userId: Long): LiveData<BankAccount?>
     suspend fun getBankAccount(userId: Long): BankAccount?
     suspend fun getBankAccountByAccNo(accountNo: Long): BankAccount?
     suspend fun getBankAccountByUpiId(upiId : String): BankAccount?

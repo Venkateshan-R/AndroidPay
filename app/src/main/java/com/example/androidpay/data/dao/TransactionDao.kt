@@ -12,7 +12,7 @@ interface TransactionDao {
     suspend fun saveTransaction(transaction: TransactionModel)
 
     @Query("SELECT * FROM TransactionModel WHERE senderId = :userId OR receiverId = :userId ORDER BY transactionDate DESC")
-    fun getAllTransactions(userId: Long): LiveData<List<TransactionModel>>
+    suspend fun getAllTransactions(userId: Long): List<TransactionModel>
 
     @Query("SELECT * FROM TransactionModel")
     suspend fun getAllTransactions(): List<TransactionModel>

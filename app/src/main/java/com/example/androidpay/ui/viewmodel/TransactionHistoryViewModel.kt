@@ -15,8 +15,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TransactionHistoryViewModel(val mApplication: Application) : AndroidViewModel(mApplication) {
-
-
     init {
         (mApplication as MyApplication).appComponent.inject(this)
     }
@@ -27,26 +25,16 @@ class TransactionHistoryViewModel(val mApplication: Application) : AndroidViewMo
     lateinit var transactionRepositoryImpl: TransactionRepositoryImpl
 
     @Inject
-    lateinit var sessionManager : SessionManager
+    lateinit var sessionManager: SessionManager
 
-
-    fun getAllTransactionHistory(){
-        if (getUserId() == 0L) {
-            resultLiveData.value = ResultData.Failure(mApplication.getString(R.string.please_login))
-            return
-        }
-        //need to check observerforever
-        transactionRepositoryImpl.getAllTransactionsByUserId(getUserId()).observeForever {
-            it?.let {
-                if (it.size>0)
+    fun getAllTransactionHistory() {
+        viewModelScope.launch {
+            transactionRepositoryImpl.getAllTransactionsByUserId(getUserId()).let {
                 resultLiveData.value = ResultData.Success(it)
             }
-
         }
     }
 
-
     fun getUserId(): Long = sessionManager.userId
-
 
 }

@@ -5,7 +5,7 @@ import com.example.androidpay.data.model.TransactionModel
 
 interface TransactionRepository {
     suspend fun saveTransaction(transaction: TransactionModel)
-    fun getAllTransactionsByUserId(userId: Long):LiveData<List<TransactionModel>>
+    suspend fun getAllTransactionsByUserId(userId: Long):List<TransactionModel>
 
     suspend fun getAllTransactionsByUpiId(upiId: String): List<TransactionModel>
     suspend fun getAllTransactions(): List<TransactionModel>

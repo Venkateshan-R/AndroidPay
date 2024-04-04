@@ -15,7 +15,7 @@ data class TransactionModel(
     val senderName: String,
     val receiverName: String,
     val amount: Double,
-    val transactionDate: Long,
+    val transactionDate: Long, //storing timestamp value
     val remarks: String,
     private @PrimaryKey(autoGenerate = true) val transactionid: Int=0
 
@@ -25,6 +25,7 @@ data class TransactionModel(
         return DecimalFormat("#,###.00").format(amount)
     }
 
+    //formatting date and time ex : 04 Apr 2024 12:15 AM
     fun getFormattedDayMonthYearFormat(): String =
         SimpleDateFormat("dd MMM yyyy h.mm a").format(Date(transactionDate))
 }

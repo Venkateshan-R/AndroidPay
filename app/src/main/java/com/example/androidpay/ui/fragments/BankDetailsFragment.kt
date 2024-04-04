@@ -26,7 +26,6 @@ class BankDetailsFragment : BaseFragment<BankAccRegViewModel, FragmentBankDetail
     }
 
     fun setClickListeners() {
-        //need to check to handle add transaction
         viewBinding.ivClose.setOnClickListener {
             backAction()
         }

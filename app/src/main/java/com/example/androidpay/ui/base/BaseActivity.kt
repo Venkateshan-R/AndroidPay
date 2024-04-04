@@ -18,7 +18,6 @@ abstract class BaseActivity<VM : ViewModel, B : ViewBinding> : AppCompatActivity
             setContentView(it.root)
         }
 
-        // Consider using a dependency injection framework for ViewModel
         viewModel = ViewModelProvider(this).get(getViewModelClass())
         initView()
     }

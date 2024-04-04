@@ -12,7 +12,7 @@ class TransactionRepositoryImpl @Inject constructor(private val transactionDao: 
         transactionDao.saveTransaction(transaction)
     }
 
-    override fun getAllTransactionsByUserId(userId: Long): LiveData<List<TransactionModel>> =
+    suspend override fun getAllTransactionsByUserId(userId: Long): List<TransactionModel> =
         transactionDao.getAllTransactions(userId)
 
     override suspend fun getAllTransactionsByUpiId(upiId: String): List<TransactionModel> =

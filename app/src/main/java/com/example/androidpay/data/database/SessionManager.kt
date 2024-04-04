@@ -8,8 +8,6 @@ class SessionManager @Inject constructor() {
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-
-
     var userId: Long
         get() {
             return sharedPreferences.getLong("userId", 0)

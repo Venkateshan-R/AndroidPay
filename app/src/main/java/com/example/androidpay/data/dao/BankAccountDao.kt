@@ -17,9 +17,6 @@ interface BankAccountDao {
     suspend fun updateBankAccount(bankAccount: BankAccount)
 
     @Query("SELECT * FROM BankAccount WHERE userId = :userId")
-    fun getBankAccountsForUser(userId: Long): LiveData<BankAccount?>
-
-    @Query("SELECT * FROM BankAccount WHERE userId = :userId")
     suspend fun getBankAccount(userId: Long): BankAccount?
 
     @Query("SELECT * FROM BankAccount WHERE accountNumber = :accountNo")

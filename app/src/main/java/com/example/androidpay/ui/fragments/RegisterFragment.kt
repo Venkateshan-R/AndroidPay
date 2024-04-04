@@ -45,7 +45,6 @@ class RegisterFragment : BaseFragment<UserViewModel, FragmentRegisterBinding>() 
     }
 
     private fun setclickListeners() {
-        //Need to check
         viewBinding.ivClose.setOnClickListener { viewModel.onBackPressesed() }
         viewBinding.btnRegister.setOnSafeClickListener {
             viewModel.registerUser(
