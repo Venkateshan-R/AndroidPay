@@ -126,7 +126,7 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/btn_bg_curved"
         android:text="@string/login"
         android:textColor="@color/white"

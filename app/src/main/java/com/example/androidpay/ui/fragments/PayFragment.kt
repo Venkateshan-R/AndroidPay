@@ -1,5 +1,7 @@
 package com.example.androidpay.ui.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -17,7 +19,9 @@ import com.example.androidpay.databinding.ItemPopupBinding
 import com.example.androidpay.ui.base.BaseFragment
 import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.ui.utils.setOnSafeClickListener
+import com.example.androidpay.ui.utils.setVisible
 import com.example.androidpay.ui.utils.showToast
+import com.example.androidpay.ui.utils.visible
 import com.example.androidpay.ui.viewmodel.PayViewModel
 
 
@@ -33,7 +37,7 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
     fun setUpPopUp() {
 
         val binding = ItemPopupBinding.inflate(layoutInflater)
-        binding.btnVerfiy.setOnSafeClickListener {
+        binding.btnVerify.setOnSafeClickListener {
             viewModel.verifyPin(
                 binding.etPin.text.toString(),
                 viewBinding.etUpi.text.toString(), viewBinding.etAmount.text.toString(),
@@ -42,8 +46,11 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
         }
 
         val builder = AlertDialog.Builder(requireContext())
+
         builder.setView(binding.root)
-        alertDialog = builder.create()
+        alertDialog = builder.create().also {
+            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
 
     }
 
@@ -79,6 +86,11 @@ class PayFragment : BaseFragment<PayViewModel, FragmentPayBinding>() {
 
         viewModel.navigationLiveData.observe(this, Observer {
             findNavController().navigate(it)
+        })
+
+        viewModel.viewHidingLiveData.observe(this, Observer {
+            viewBinding.payGroup.setVisible(it.not())
+            viewBinding.successGroup.setVisible(it)
         })
     }
 

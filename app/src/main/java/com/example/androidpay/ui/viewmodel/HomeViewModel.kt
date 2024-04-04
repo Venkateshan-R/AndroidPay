@@ -64,7 +64,14 @@ class HomeViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     }
 
     fun onSettingsClicked() {
-        navigationLiveData.value = R.id.action_homeFragment_to_settingsFragment
+        viewModelScope.launch {
+            val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
+            if (userBank == null)
+                resultLiveData.value =
+                    ResultData.Failure(mApplication.getString(R.string.please_add_bank_account))
+            else
+                navigationLiveData.value = R.id.action_homeFragment_to_settingsFragment
+        }
     }
 
     fun onProfileClicked() {

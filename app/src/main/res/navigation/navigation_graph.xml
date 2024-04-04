@@ -63,7 +63,7 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@+id/homeFragment"
+            app:popUpTo="@+id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -80,7 +80,7 @@
     <fragment
         android:id="@+id/bankAccountRegistrationFragment"
         android:name="com.example.androidpay.ui.fragments.BankAccountRegistrationFragment"
-        android:label="BankAccountRegistrationFragment" >
+        android:label="BankAccountRegistrationFragment">
         <action
             android:id="@+id/action_bankAccountRegistrationFragment_to_bankDetailsFragment"
             app:destination="@id/bankDetailsFragment" />
@@ -89,7 +89,7 @@
         android:id="@+id/addMoneyFragment"
         android:name="com.example.androidpay.ui.fragments.AddMoneyFragment"
         android:label="fragment_add_money"
-        tools:layout="@layout/fragment_add_money" >
+        tools:layout="@layout/fragment_add_money">
 
         <action
             android:id="@+id/action_addMoneyFragment_to_transactionhistoryfragemnt"
@@ -101,7 +101,7 @@
         android:id="@+id/payFragment"
         android:name="com.example.androidpay.ui.fragments.PayFragment"
         android:label="fragment_pay"
-        tools:layout="@layout/fragment_pay" >
+        tools:layout="@layout/fragment_pay">
 
         <action
             android:id="@+id/action_payFragment_to_transactionhistoryfragemnt"
@@ -118,5 +118,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.androidpay.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

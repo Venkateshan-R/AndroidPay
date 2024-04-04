@@ -22,6 +22,7 @@ import com.example.androidpay.ui.utils.showToast
 
 
 class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
+
     override fun getBinding(): ActivityMainBinding =
         ActivityMainBinding.inflate(layoutInflater)
 
@@ -50,23 +51,26 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
 
     fun initPrint() {
         viewModel.logLiveData.observe(this, Observer {
-            Log.d("RoomDatas", it.toString())
+            Log.d("DEBUG_DATABASE", it.toString())
         })
         viewModel.logBankLiveData.observe(this, Observer {
-            Log.d("RoomDatas", it.toString())
+            Log.d("DEBUG_DATABASE", it.toString())
         })
         viewModel.logTransactionLiveData.observe(this, Observer {
-            Log.d("RoomDatas", it.toString())
+            Log.d("DEBUG_DATABASE", it.toString())
         })
     }
 
     override fun onResume() {
         super.onResume()
+
+        //for debugging purpose i have added logs . it will print all the datas of USER,BANK ACCOUNTS,TRANSACTION
         viewModel.getallusers()
         viewModel.getAllbankAcc()
         viewModel.getAllTransaction()
     }
 
+    //To handle backpress in fragment
     override fun onBackPressed() {
         val fragment =( supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).getChildFragmentManager().getFragments().get(0);
         if (fragment is OnBackPressedListener) {

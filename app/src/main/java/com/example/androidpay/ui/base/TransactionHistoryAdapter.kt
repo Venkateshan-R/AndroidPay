@@ -28,7 +28,7 @@ class TransactionHistoryAdapter : RecyclerView.Adapter<TransactionHistoryAdapter
             tvAmount.setTextColor(getTextcolor(transactionModel))
             tvName.text = formatNameTxt(transactionModel)
             tvRemarks.text = transactionModel.remarks
-            tvDate.text = timestampToDayMonthYearFormat(transactionModel.transactionDate)
+            tvDate.text = transactionModel.getFormattedDayMonthYearFormat()
         }
 
         fun formatAmountTxt(transactionModel: TransactionModel): String =
@@ -55,8 +55,7 @@ class TransactionHistoryAdapter : RecyclerView.Adapter<TransactionHistoryAdapter
 
         fun getContext() = binding.root.context
 
-        fun timestampToDayMonthYearFormat(timestampInMilliseconds: Long): String =
-            SimpleDateFormat("dd MMM yyyy").format(Date(timestampInMilliseconds))
+
     }
 
 

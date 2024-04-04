@@ -3,6 +3,8 @@ package com.example.androidpay.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 
 @Entity
 data class TransactionModel(
@@ -22,4 +24,7 @@ data class TransactionModel(
     public fun getFormattedBalace() : String{
         return DecimalFormat("#,###.00").format(amount)
     }
+
+    fun getFormattedDayMonthYearFormat(): String =
+        SimpleDateFormat("dd MMM yyyy h.mm a").format(Date(transactionDate))
 }

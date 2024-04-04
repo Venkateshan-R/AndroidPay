@@ -15,8 +15,8 @@ data class BankAccount(
     val bankName: String,
     val PIN: Int,
     val upiId: String,
-    val perDayTransactionLimit: Int = Constants.PER_DAY_TRANSACTION_LIMIT,
-    val perTransactionLimit: Int = Constants.PER_TRANSACTION_LIMIT,
+    var perDayTransactionLimit: Double = Constants.PER_DAY_TRANSACTION_LIMIT,
+    var perTransactionLimit: Double = Constants.PER_TRANSACTION_LIMIT,
     var balance: Double = 0.0
 ) {
 

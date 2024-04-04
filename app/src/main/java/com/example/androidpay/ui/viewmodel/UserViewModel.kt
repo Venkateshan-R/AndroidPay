@@ -19,6 +19,7 @@ import javax.inject.Inject
 class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplication) {
 
     var resultLiveData: MutableLiveData<ResultData<User>> = MutableLiveData()
+    val navigationLiveData: MutableLiveData<Int?> = MutableLiveData()
 
     init {
         (mApplication as MyApplication).appComponent.inject(this)
@@ -30,12 +31,11 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
     @Inject
     lateinit var sessionManager: SessionManager
 
-    fun getCurrentUser(){
+    fun getCurrentUser() {
         viewModelScope.launch {
             userRepositoryImpl.getUserByuserId(getUserId())?.let {
-                resultLiveData.value =ResultData.Success(it)
+                resultLiveData.value = ResultData.Success(it)
             }
-
         }
     }
 
@@ -55,7 +55,12 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
                     val user = User(mobileNumber, password, firstName, lastName)
                     val userId = userRepositoryImpl.insertUser(user)
                     storeUserId(userId)
-                    resultLiveData.value = ResultData.Success(user)
+                    resultLiveData.value =
+                        ResultData.Success(
+                            user,
+                            mApplication.getString(R.string.user_registered_successfully)
+                        )
+                    navigationLiveData.value = R.id.action_registerFragment_to_homeFragment
 
                 } else {
                     resultLiveData.value =
@@ -81,7 +86,12 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
 
                 if (user != null && user.password.contentEquals(password, ignoreCase = false)) {
                     storeUserId(user.getUserId())
-                    resultLiveData.value = ResultData.Success(user)
+                    resultLiveData.value =
+                        ResultData.Success(
+                            user,
+                            mApplication.getString(R.string.user_logged_in_successfully)
+                        )
+                    navigationLiveData.value = R.id.action_loginFragment_to_homeFragment
                 } else {
                     resultLiveData.value =
                         ResultData.Failure(mApplication.getString(R.string.user_not_exist))
@@ -123,5 +133,20 @@ class UserViewModel(val mApplication: Application) : AndroidViewModel(mApplicati
         sessionManager.userId = id
     }
 
-    private fun getUserId()=  sessionManager.userId
+    fun onRegisterClicked() {
+        navigationLiveData.value = R.id.action_loginFragment_to_registerFragment
+    }
+
+    fun onBackPressesed() {
+        navigationLiveData.value = null
+    }
+
+    fun logout() {
+        sessionManager.clearAll()
+        navigationLiveData.value = R.id.action_profileFragment_to_loginFragment
+
+    }
+
+
+    private fun getUserId() = sessionManager.userId
 }

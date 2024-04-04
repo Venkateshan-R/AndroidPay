@@ -11,6 +11,7 @@ import com.example.androidpay.R
 import com.example.androidpay.databinding.FragmentHomeBinding
 import com.example.androidpay.databinding.FragmentSettingsBinding
 import com.example.androidpay.ui.base.BaseFragment
+import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.ui.utils.showToast
 import com.example.androidpay.ui.viewmodel.CommonViewModel
 import com.example.androidpay.ui.viewmodel.SettingsViewModel
@@ -23,28 +24,47 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun initView() {
         setUpObservers()
         setclickListeners()
+        viewModel.getUserBankAccount()
     }
 
     fun setUpObservers() {
-        viewModel.getButtonText().observe(this, Observer {
-            viewBinding.btnLogin.text = it
-        })
 
         viewModel.navigationLiveData.observe(this, Observer {
-            findNavController().navigate(it)
+            it?.let {
+                findNavController().navigate(it)
+            } ?: let { onBackClicked() }
+        })
+
+        viewModel.resultLiveData.observe(this, Observer {
+            when (it) {
+                is ResultData.Success -> {
+                    viewBinding.etPerTransaction.setText(it.data.perTransactionLimit.toString())
+                    viewBinding.etPerdayTransaction.setText(it.data.perDayTransactionLimit.toString())
+                }
+                is ResultData.Failure -> context?.showToast(it.message)
+            }
         })
 
     }
 
     fun setclickListeners() {
 
-        viewBinding.btnLogin.setOnClickListener {
-           viewModel.onLoginButtonclick()
+        viewBinding.btnSave.setOnClickListener {
+            viewModel.onSaveclick(
+                viewBinding.etPerTransaction.text.toString(),
+                viewBinding.etPerdayTransaction.text.toString()
+            )
         }
 
-        viewBinding.btnAddaccount.setOnClickListener {
-           viewModel.onAddAccountButtonclick()
+        viewBinding.ivClose.setOnClickListener {
+            onBackClicked()
         }
+
+
+    }
+
+    fun onBackClicked() {
+        findNavController().popBackStack()
     }
 
 

@@ -31,18 +31,22 @@ class RegisterFragment : BaseFragment<UserViewModel, FragmentRegisterBinding>() 
     private fun setLiveDataObserver() {
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
-               is ResultData.Success -> {
-                   context?.showToast("Success")
-                   findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
-               }
+                is ResultData.Success -> {
+                    context?.showToast(it.message)
+                }
                 is ResultData.Failure -> context?.showToast(it.message)
             }
+        })
+        viewModel.navigationLiveData.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(it)
+            } ?: findNavController().popBackStack()
         })
     }
 
     private fun setclickListeners() {
         //Need to check
-        viewBinding.ivClose.setOnClickListener { findNavController().popBackStack() }
+        viewBinding.ivClose.setOnClickListener { viewModel.onBackPressesed() }
         viewBinding.btnRegister.setOnSafeClickListener {
             viewModel.registerUser(
                 viewBinding.etMobile.text.toString(),

@@ -7,8 +7,6 @@
     <color name="btn_bg">#499CF4</color>
     <color name="blue">#499CF4</color>
     <color name="view_bg">#01050C</color>
-    <color name="et_bg">#6D7F9A</color>
-    <color name="hint">#E6E2E2</color>
     <color name="light_grey">#D3D3D3</color>
     <color name="amount_added">#388E3C</color>
     <color name="amount_deducted">#F3645A</color>

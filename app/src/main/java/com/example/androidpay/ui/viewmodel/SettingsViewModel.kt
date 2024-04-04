@@ -13,6 +13,7 @@ import com.example.androidpay.data.repository.UserRepositoryImpl
 import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.data.database.SessionManager
+import com.example.androidpay.data.model.BankAccount
 import com.example.androidpay.ui.utils.showToast
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class SettingsViewModel(val mApplication: Application) : AndroidViewModel(mAppli
         (mApplication as MyApplication).appComponent.inject(this)
     }
 
-    var resultLiveData: MutableLiveData<ResultData<User>> = MutableLiveData()
+    var resultLiveData: MutableLiveData<ResultData<BankAccount>> = MutableLiveData()
 
     @Inject
     lateinit var userRepositoryImpl: UserRepositoryImpl
@@ -34,37 +35,53 @@ class SettingsViewModel(val mApplication: Application) : AndroidViewModel(mAppli
     @Inject
     lateinit var sessionManager: SessionManager
 
-    val btnText: MutableLiveData<String> = MutableLiveData()
-    val navigationLiveData: MutableLiveData<Int> = MutableLiveData()
+    val navigationLiveData: MutableLiveData<Int?> = MutableLiveData()
 
-    fun getButtonText(): LiveData<String> {
-        return btnText.also {
-            it.value = if (isUserLoggedIn()) mApplication.getString(R.string.logout)
-            else mApplication.getString(R.string.login)
+
+    fun getUserBankAccount() {
+        viewModelScope.launch {
+            val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
+            if (userBank == null) {
+
+            } else
+                resultLiveData.value = ResultData.Success(userBank!!)
         }
     }
 
-    fun onLoginButtonclick() {
-        if (isUserLoggedIn()) {
-            logout()
-            btnText.value = mApplication.getString(R.string.login)
-        } else navigationLiveData.value = R.id.action_settingsFragment_to_loginFragment
+    fun onSaveclick(perTxnLimit: String, dailyTxnLimit: String) {
 
 
-    }
+        val validationError = validateInputs(perTxnLimit, dailyTxnLimit)
 
-    fun onAddAccountButtonclick() {
-        if (isUserLoggedIn()) {
+        if (validationError.isEmpty()) {
             viewModelScope.launch {
                 val userBank = bankAccountRepositoryImpl.getBankAccount(getUserId());
-                if (userBank == null)
-                    navigationLiveData.value =
-                        R.id.action_settingsFragment_to_bankAccountRegistrationFragment
-                else
-                    mApplication.showToast(mApplication.getString(R.string.account_already_added))
+                userBank?.let {
+                    userBank.perTransactionLimit = perTxnLimit.toDouble()
+                    userBank.perDayTransactionLimit = dailyTxnLimit.toDouble()
+
+                    bankAccountRepositoryImpl.updateBankAccount(userBank)
+
+                    navigationLiveData.value = null
+
+                }
+
             }
+        } else {
+            resultLiveData.value = ResultData.Failure(validationError)
         }
+
     }
+
+    private fun validateInputs(perTxnLimit: String, dailyTxnLimit: String): String {
+
+        if (perTxnLimit.isBlank() || perTxnLimit.toDouble() <= 0)
+            return mApplication.getString(R.string.per_transaction_limit_must_be_greater_than_0)
+        if (dailyTxnLimit.isBlank() || dailyTxnLimit.toDouble() <= 0)
+            return mApplication.getString(R.string.daily_transaction_limit_must_be_greater_than_0)
+        return ""
+    }
+
 
     fun getUserId(): Long = sessionManager.userId
 

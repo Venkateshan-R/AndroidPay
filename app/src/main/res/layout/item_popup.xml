@@ -2,28 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="30dp"
     android:background="@drawable/rounded_corner_bottomnv"
+    android:backgroundTint="@color/white"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_pin"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_firstname"
+        style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/white"
-        android:maxLength="4"
-        android:hint="@string/enter_pin"
-        android:textStyle="bold" />
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/enter_4_digit_pin"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/btn_verfiy"
-        android:layout_width="wrap_content"
-
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_pin"
+        style="@style/text_regular"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/verify" />
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/et_bg_curved"
+        android:gravity="center"
+        android:hint="@string/enter_4_digit_pin"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="4"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_black"
+        android:textCursorDrawable="@null"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_verify"
+        style="@style/text_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_bg_curved"
+        android:text="@string/send_money"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
 
 </LinearLayout>

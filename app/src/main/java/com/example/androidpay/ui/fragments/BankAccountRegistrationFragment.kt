@@ -14,7 +14,6 @@ import com.example.androidpay.ui.base.BaseFragment
 import com.example.androidpay.ui.utils.ResultData
 import com.example.androidpay.ui.utils.showToast
 import com.example.androidpay.ui.viewmodel.BankAccRegViewModel
-import com.example.androidpay.ui.viewmodel.SettingsViewModel
 
 class BankAccountRegistrationFragment :
     BaseFragment<BankAccRegViewModel, FragmentBankAccountRegistrationBinding>() {

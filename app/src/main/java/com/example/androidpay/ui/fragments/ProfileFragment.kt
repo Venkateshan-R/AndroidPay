@@ -38,10 +38,16 @@ class ProfileFragment : BaseFragment<UserViewModel, FragmentProfileBinding>() {
                 is ResultData.Failure -> {}
             }
         })
+
+        viewModel.navigationLiveData.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(it)
+            } ?: findNavController().popBackStack()
+        })
     }
 
     fun setClickListeners() {
-        viewBinding.ivClose.setOnClickListener { findNavController().popBackStack() }
+        viewBinding.ivClose.setOnClickListener { viewModel.onBackPressesed() }
+        viewBinding.btnLogout.setOnClickListener { viewModel.logout() }
     }
-
 }

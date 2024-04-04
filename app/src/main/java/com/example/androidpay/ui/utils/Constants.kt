@@ -6,7 +6,7 @@ object Constants {
     const val MOBILE_NUMBER_LENGTH = 4
     const val ACCOUNT_NUMBER_LENGTH = 12
     const val AUTHENTICATION_PIN = 4
-    const val PER_TRANSACTION_LIMIT = 1000
-    const val PER_DAY_TRANSACTION_LIMIT = 1200
+    const val PER_TRANSACTION_LIMIT :Double= 1000.0
+    const val PER_DAY_TRANSACTION_LIMIT :Double= 1200.0
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.androidpay.R
 import com.example.androidpay.databinding.FragmentLoginBinding
@@ -29,18 +30,24 @@ class LoginFragment : BaseFragment<UserViewModel, FragmentLoginBinding>() {
         viewModel.resultLiveData.observe(this, Observer {
             when (it) {
                 is ResultData.Success -> {
-                    context?.showToast("Success")
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    context?.showToast(it.message)
                 }
                 is ResultData.Failure -> context?.showToast(it.message)
             }
+        })
+        viewModel.navigationLiveData.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(it,null, NavOptions.Builder()
+                    .setPopUpTo(R.id.homeFragment,
+                        true).build())
+            } ?: findNavController().popBackStack()
         })
     }
 
     private fun setclickListeners(){
         //Need to check
         //viewBinding.ivClose.setOnClickListener { findNavController().popBackStack() }
-        viewBinding.tvNewuser.setOnClickListener { findNavController().navigate(R.id.action_loginFragment_to_registerFragment) }
+        viewBinding.tvNewuser.setOnClickListener { viewModel.onRegisterClicked() }
         viewBinding.btnLogin.setOnSafeClickListener {
             viewModel.loginUser(viewBinding.etMobile.text.toString(),viewBinding.etPassword.text.toString(),)
         }

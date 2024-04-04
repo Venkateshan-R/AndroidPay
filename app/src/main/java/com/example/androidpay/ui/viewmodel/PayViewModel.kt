@@ -15,6 +15,7 @@ import com.example.androidpay.data.repository.TransactionRepositoryImpl
 import com.example.androidpay.data.repository.UserRepositoryImpl
 import com.example.androidpay.ui.base.MyApplication
 import com.example.androidpay.ui.utils.ResultData
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import javax.inject.Inject
@@ -27,6 +28,8 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
 
     var resultLiveData: MutableLiveData<ResultData<String>> = MutableLiveData()
     var popUpLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    var viewHidingLiveData: MutableLiveData<Boolean> =
+        MutableLiveData<Boolean>().apply { value = false }
     val navigationLiveData: MutableLiveData<Int> = MutableLiveData()
 
 
@@ -44,6 +47,11 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
 
     fun transferAmount(receiverUpi: String, amount: String, remarks: String) {
 
+        if (viewHidingLiveData.value ?: false) {
+            navigationLiveData.value = R.id.action_payFragment_to_transactionhistoryfragemnt
+            return
+        }
+
         if (getUserId() == 0L) {
             resultLiveData.value = ResultData.Failure(mApplication.getString(R.string.please_login))
             return
@@ -58,46 +66,16 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
                 val receiverBankAccount =
                     bankAccountRepositoryImpl.getBankAccountByUpiId(receiverUpi)
 
-                currentUserBankAccount?.let { currentBank ->
-                    receiverBankAccount?.let { receiverBank ->
+                val error = validateBanksDatas(
+                    currentUserBankAccount,
+                    receiverBankAccount,
+                    amount
+                )
 
-
-                        if (currentBank.upiId.contentEquals(receiverBank.upiId)) {
-                            resultLiveData.value =
-                                ResultData.Failure(mApplication.getString(R.string.amount_cannot_be_transferred_to_same_account))
-
-                        } else if (currentBank.balance < amount.toDouble()) {
-                            resultLiveData.value =
-                                ResultData.Failure((mApplication.getString(R.string.insufficient_balance)))
-
-                        } else if (amount.toDouble() > currentBank.perTransactionLimit) {
-                            resultLiveData.value =
-                                ResultData.Failure(mApplication.getString(R.string.you_are_exceeding_per_transaction_limit))
-
-                        } else if (amount.toDouble() > receiverBank.perTransactionLimit) {
-                            resultLiveData.value =
-                                ResultData.Failure(mApplication.getString(R.string.transfer_failed_amount_exceeds_receiver_s_limit))
-                        } else if ((getTodayTransaction(currentBank) + amount.toDouble()) > currentBank.perDayTransactionLimit) {
-                            resultLiveData.value =
-                                ResultData.Failure(mApplication.getString(R.string.unable_to_transfer_your_daily_transfer_limit_has_been_reached))
-                        } else if ((getTodayTransaction(receiverBankAccount) + amount.toDouble()) > receiverBankAccount.perDayTransactionLimit) {
-                            resultLiveData.value =
-                                ResultData.Failure(mApplication.getString(R.string.unable_to_transfer_receiver_s_daily_transfer_limit_has_been_reached))
-                        } else {
-                            popUpLiveData.value = true
-                        }
-
-
-                    } ?: let {
-                        resultLiveData.value =
-                            ResultData.Failure((mApplication.getString(R.string.please_enter_valid_upi)))
-                    }
-
-                } ?: let {
-                    resultLiveData.value =
-                        ResultData.Failure(mApplication.getString(R.string.please_add_bank_account))
-                }
-
+                if (error.isEmpty()
+                )
+                    popUpLiveData.value = true
+                else resultLiveData.value = ResultData.Failure(error)
 
             }
         } else {
@@ -143,7 +121,8 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
             popUpLiveData.value = false
             resultLiveData.value =
                 ResultData.Success(mApplication.getString(R.string.amount_transfered_successfully))
-            navigationLiveData.value = R.id.action_payFragment_to_transactionhistoryfragemnt
+            //  navigationLiveData.value = R.id.action_payFragment_to_transactionhistoryfragemnt
+            viewHidingLiveData.value = true
 
 
         }
@@ -157,11 +136,52 @@ class PayViewModel(val mApplication: Application) : AndroidViewModel(mApplicatio
 
 
     private fun validateInputs(receiverUpi: String, amount: String): String {
-        if (receiverUpi.isBlank() || !receiverUpi.contains("@"))
-            return mApplication.getString(R.string.please_enter_valid_upi)
+
         if (amount.isBlank() || amount.toDouble() <= 0)
             return "Enter Amount Greater than 0"
+
+        if (receiverUpi.isBlank() || !receiverUpi.contains("@"))
+            return mApplication.getString(R.string.please_enter_valid_upi)
+
         return ""
+    }
+
+    private suspend fun validateBanksDatas(
+        currentBank: BankAccount?,
+        receiverBank: BankAccount?,
+        amount: String
+    ): String = coroutineScope {
+
+
+        when {
+            currentBank == null -> mApplication.getString(R.string.please_add_bank_account)
+
+            receiverBank == null -> mApplication.getString(R.string.please_enter_valid_upi)
+
+            currentBank.upiId.contentEquals(receiverBank.upiId) -> mApplication.getString(R.string.amount_cannot_be_transferred_to_same_account)
+
+            (currentBank.balance < amount.toDouble()) -> mApplication.getString(R.string.insufficient_balance)
+
+            (amount.toDouble() > currentBank.perTransactionLimit) -> mApplication.getString(R.string.you_are_exceeding_per_transaction_limit)
+
+            (amount.toDouble() > receiverBank.perTransactionLimit) -> mApplication.getString(R.string.transfer_failed_amount_exceeds_receiver_s_limit)
+
+            ((getTodayTransaction(currentBank) + amount.toDouble()) > currentBank.perDayTransactionLimit) -> mApplication.getString(
+                R.string.unable_to_transfer_your_daily_transfer_limit_has_been_reached
+            )
+
+            ((getTodayTransaction(receiverBank) + amount.toDouble() > receiverBank.perDayTransactionLimit)) -> mApplication.getString(
+                R.string.unable_to_transfer_receiver_s_daily_transfer_limit_has_been_reached
+            )
+
+            ((getTodayTransaction(currentBank) + amount.toDouble()) > currentBank.perDayTransactionLimit)
+            -> mApplication.getString(R.string.unable_to_transfer_your_daily_transfer_limit_has_been_reached)
+
+            ((getTodayTransaction(receiverBank) + amount.toDouble()) > receiverBank.perDayTransactionLimit)
+            -> mApplication.getString(R.string.unable_to_transfer_receiver_s_daily_transfer_limit_has_been_reached)
+
+            else -> ""
+        }
     }
 
     suspend fun getTodayTransaction(bankAccount: BankAccount): Double {
