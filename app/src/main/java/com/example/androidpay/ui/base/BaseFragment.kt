@@ -1,13 +1,16 @@
 package com.example.androidpay.ui.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
+import com.example.androidpay.R
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<VM : ViewModel, B : ViewBinding> : Fragment() {
@@ -26,15 +29,16 @@ abstract class BaseFragment<VM : ViewModel, B : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        if (!this::viewBinding.isInitialized)
-        {
+        if (!this::viewBinding.isInitialized) {
             viewBinding = getBinding()
             initView()
         }
-
         return viewBinding.root
+    }
 
 
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

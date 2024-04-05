@@ -106,7 +106,7 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_upi"
-        style="@style/text_regular"
+        style="@style/text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -119,6 +119,7 @@
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"
+        android:textSize="15sp"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textColorHint="@color/black"

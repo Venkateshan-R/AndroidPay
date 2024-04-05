@@ -32,24 +32,26 @@ class LoginFragment : BaseFragment<UserViewModel, FragmentLoginBinding>() {
                 is ResultData.Success -> {
                     context?.showToast(it.message)
                 }
+
                 is ResultData.Failure -> context?.showToast(it.message)
             }
         })
         viewModel.navigationLiveData.observe(this, Observer {
             it?.let {
-                findNavController().navigate(it,null, NavOptions.Builder()
-                    .setPopUpTo(R.id.homeFragment,
-                        true).build())
+                findNavController().navigate(it)
             } ?: findNavController().popBackStack()
         })
     }
 
-    private fun setclickListeners(){
+    private fun setclickListeners() {
         //Need to check
         //viewBinding.ivClose.setOnClickListener { findNavController().popBackStack() }
         viewBinding.tvNewuser.setOnClickListener { viewModel.onRegisterClicked() }
         viewBinding.btnLogin.setOnSafeClickListener {
-            viewModel.loginUser(viewBinding.etMobile.text.toString(),viewBinding.etPassword.text.toString(),)
+            viewModel.loginUser(
+                viewBinding.etMobile.text.toString(),
+                viewBinding.etPassword.text.toString(),
+            )
         }
 
     }

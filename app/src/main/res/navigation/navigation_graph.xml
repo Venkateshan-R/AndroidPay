@@ -11,24 +11,38 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_addMoneyFragment"
             app:destination="@id/addMoneyFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_payFragment"
             app:destination="@id/payFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_transactionFragment"
             app:destination="@id/transactionFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_bankDetailsFragment"
             app:destination="@id/bankDetailsFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_bankAccountRegistrationFragment"
             app:destination="@id/bankAccountRegistrationFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
@@ -42,13 +56,19 @@
         android:name="com.example.androidpay.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_settingsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_settingsFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_settingsFragment_to_bankAccountRegistrationFragment"
             app:destination="@id/bankAccountRegistrationFragment" />
     </fragment>
@@ -57,10 +77,14 @@
         android:name="com.example.androidpay.ui.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@+id/loginFragment"
@@ -71,17 +95,21 @@
         android:name="com.example.androidpay.ui.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@+id/homeFragment"
+            app:popUpTo="@+id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/bankAccountRegistrationFragment"
         android:name="com.example.androidpay.ui.fragments.BankAccountRegistrationFragment"
         android:label="BankAccountRegistrationFragment">
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_bankAccountRegistrationFragment_to_bankDetailsFragment"
             app:destination="@id/bankDetailsFragment" />
     </fragment>
@@ -91,7 +119,9 @@
         android:label="fragment_add_money"
         tools:layout="@layout/fragment_add_money">
 
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_addMoneyFragment_to_transactionhistoryfragemnt"
             app:destination="@id/transactionFragment" />
 
@@ -103,7 +133,9 @@
         android:label="fragment_pay"
         tools:layout="@layout/fragment_pay">
 
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_payFragment_to_transactionhistoryfragemnt"
             app:destination="@id/transactionFragment" />
 
@@ -114,15 +146,19 @@
         android:name="com.example.androidpay.ui.fragments.BankDetailsFragment"
         android:label="fragment_bank_details"
         tools:layout="@layout/fragment_bank_details" />
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.androidpay.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
-        <action
+         <action
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slide_out"
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
 </navigation>

@@ -4,6 +4,7 @@ package com.example.androidpay.ui.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -30,7 +31,6 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
         (application as MyApplication).appComponent.inject(this)
         setUpNavigation()
         initPrint()
-
     }
 
     fun setUpNavigation() {
@@ -63,8 +63,8 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
-
-        //for debugging purpose i have added logs . it will print all the datas of USER,BANK ACCOUNTS,TRANSACTION
+        Log.d("ondestory", "onresume")
+        //for debugging purpose it will print all the datas of USER,BANK ACCOUNTS,TRANSACTION
         viewModel.getallusers()
         viewModel.getAllbankAcc()
         viewModel.getAllTransaction()
@@ -72,7 +72,9 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
 
     //To handle backpress in fragment
     override fun onBackPressed() {
-        val fragment =( supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).getChildFragmentManager().getFragments().get(0);
+        val fragment =
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).getChildFragmentManager()
+                .getFragments().get(0);
         if (fragment is OnBackPressedListener) {
             fragment.onBackPressed()
         } else {
@@ -80,4 +82,7 @@ class MainActivity : BaseActivity<CommonViewModel, ActivityMainBinding>() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }
